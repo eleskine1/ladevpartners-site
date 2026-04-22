@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Inquire — LA/DP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"/>
+<style>
+  .page-head { padding: 100px 0 60px; }
+  .page-head-grid { display: grid; grid-template-columns: 260px 1fr; gap: 48px; align-items: baseline; }
+  .page-title { font-family: var(--f-edit); font-weight: 300; font-size: clamp(56px, 7vw, 120px); line-height: 0.95; letter-spacing: -0.03em; }
+  .lede { font-size: 20px; line-height: 1.5; color: var(--fg-soft); margin-top: 28px; max-width: 640px; }
+
+  .form-grid { display: grid; grid-template-columns: 360px 1fr; gap: 80px; padding: 60px 0 120px; border-top: 1px solid var(--rule); }
+  .form-aside .meta-block { margin-bottom: 40px; }
+  .form-aside .meta-block .meta { margin-bottom: 10px; }
+  .form-aside .meta-block .v { font-family: var(--f-display); font-size: 15px; line-height: 1.6; color: var(--fg); }
+  .form-aside .meta-block .v a { text-decoration: underline; text-underline-offset: 3px; color: var(--accent); }
+  .form-aside .quote { font-family: var(--f-edit); font-style: italic; font-weight: 300; font-size: 22px; line-height: 1.3; letter-spacing: -0.02em; color: var(--fg); padding: 24px; background: var(--card); border-left: 2px solid var(--accent); }
+
+  form { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--rule); }
+  .field { padding: 24px 0; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 8px; }
+  .field.full { grid-column: 1 / -1; }
+  .field.right { padding-left: 32px; border-left: 1px solid var(--rule); }
+  .field label { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--meta); }
+  .field .req { color: var(--accent); }
+  .field input, .field select, .field textarea { border: 0; background: transparent; font-family: var(--f-display); font-size: 18px; color: var(--fg); padding: 4px 0; outline: none; border-bottom: 1px solid transparent; transition: border-color .2s; width: 100%; letter-spacing: -0.01em; }
+  .field input::placeholder, .field textarea::placeholder { color: var(--meta); font-weight: 300; }
+  .field input:focus, .field select:focus, .field textarea:focus { border-bottom-color: var(--accent); }
+  .field textarea { resize: vertical; min-height: 100px; font-family: var(--f-edit); font-weight: 300; font-style: italic; font-size: 20px; line-height: 1.4; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .chip { padding: 10px 16px; font-family: var(--f-display); font-size: 14px; border: 1px solid var(--rule-strong); background: transparent; color: var(--fg); border-radius: 999px; cursor: pointer; transition: all .15s; }
+  .chip.active { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  .submit-row { padding: 32px 0; display: flex; justify-content: space-between; align-items: center; grid-column: 1 / -1; }
+  .submit-row .meta { max-width: 440px; line-height: 1.6; text-transform: none; letter-spacing: 0.05em; }
+  .submit-btn { font-family: var(--f-display); font-size: 15px; font-weight: 500; padding: 16px 28px; background: var(--accent); color: var(--bone); border: 0; border-radius: 999px; cursor: pointer; display: inline-flex; gap: 10px; align-items: center; transition: background .2s; }
+  .submit-btn:hover { background: var(--accent-soft); }
+
+  .thanks { display: none; padding: 80px 48px; text-align: left; background: var(--card); border-left: 2px solid var(--accent); }
+  .thanks.shown { display: block; }
+  .thanks h2 { font-family: var(--f-edit); font-weight: 300; font-size: 48px; line-height: 1; letter-spacing: -0.025em; margin: 0 0 20px; }
+  .thanks h2 i { font-style: italic; }
+  .thanks p { font-size: 17px; line-height: 1.6; color: var(--fg-soft); max-width: 520px; }
+</style>
+</head>
+<body>
+<div id="nav-slot"></div>
+
+<header class="page-head">
+  <div class="container">
+    <div class="page-head-grid">
+      <div class="meta"><span class="meta-accent">§ 006</span> · INQUIRE</div>
+      <div>
+        <h1 class="page-title">Begin an<br/><i>inquiry.</i></h1>
+        <div class="lede">Tell us about your site, your ambitions, and your timeline. We read every note and review every submission. We selectively respond to strong project candidates within two business days.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="form-grid">
+      <aside class="form-aside">
+        <div class="meta-block">
+          <div class="meta">DIRECT</div>
+          <div class="v"><a href="mailto:hello@ladevpartners.com">hello@ladevpartners.com</a></div>
+          <div class="v" style="color:var(--fg-soft); margin-top:6px;">+1 213 555 0114</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta">OFFICE</div>
+          <div class="v">520 Broadway, 2nd Floor<br/>Santa Monica, CA 90401</div>
+          <div class="v" style="color:var(--fg-soft); margin-top:6px;">By appointment</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta">APPRENTICESHIP</div>
+          <div class="v"><a href="mailto:apprenticeship@ladevpartners.com">apprenticeship@ladevpartners.com</a></div>
+          <div class="v" style="color:var(--fg-soft); margin-top:6px;">We hire quietly, and rarely.</div>
+        </div>
+        <div class="quote">Due to volume of submissions and our “high touch” standard of care, we’re selective about what we take on — and patient about finding the right fit.</div>
+      </aside>
+
+      <div>
+        <div id="thanks" class="thanks">
+          <div class="meta meta-accent" style="margin-bottom:20px;">RECEIVED · THANK YOU</div>
+          <h2>Received. <i>With care.</i></h2>
+          <p>A member of the practice will write back within two business days. In the meantime, the <a href="journal.html" style="color:var(--accent); text-decoration:underline; text-underline-offset:3px;">journal</a> has notes on how we begin.</p>
+        </div>
+
+        <form id="inquiry" novalidate>
+          <div class="field"><label>Name <span class="req">*</span></label><input required type="text" name="name" placeholder="Your name"/></div>
+          <div class="field right"><label>Email <span class="req">*</span></label><input required type="email" name="email" placeholder="you@domain.com"/></div>
+
+          <div class="field"><label>Role</label><select name="role"><option>Private client</option><option>Developer</option><option>Family office</option><option>Architect / designer</option><option>Other</option></select></div>
+          <div class="field right"><label>Project location</label><input type="text" name="loc" placeholder="Neighborhood, city"/></div>
+
+          <div class="field full"><label>Discipline of interest</label>
+            <div class="chips" data-group="discipline">
+              <button type="button" class="chip">Construction Management</button>
+              <button type="button" class="chip">Design &amp; Engineering</button>
+              <button type="button" class="chip">Development</button>
+              <button type="button" class="chip">Consulting &amp; Feasibility</button>
+              <button type="button" class="chip">Underwriting</button>
+              <button type="button" class="chip">Permit Expediting</button>
+              <button type="button" class="chip">Landscape</button>
+              <button type="button" class="chip">Interior</button>
+            </div>
+          </div>
+
+          <div class="field full"><label>Budget range · USD</label>
+            <div class="chips" data-group="budget" data-single="1">
+              <button type="button" class="chip">Under 100k</button>
+              <button type="button" class="chip">100k – 500k</button>
+              <button type="button" class="chip">500k – 1M</button>
+              <button type="button" class="chip">1M – 3M</button>
+              <button type="button" class="chip">3M – 10M</button>
+              <button type="button" class="chip">10M+</button>
+              <button type="button" class="chip">Prefer not to say</button>
+            </div>
+          </div>
+
+          <div class="field full"><label>About the project <span class="req">*</span></label>
+            <textarea required name="message" placeholder="Tell us about the site, the ambition, the timeline, who else is involved…"></textarea>
+          </div>
+
+          <div class="submit-row">
+            <div class="meta">By sending, you agree to LA/DP contacting you about this inquiry. We read every note, and will never share it.</div>
+            <button class="submit-btn" type="submit">Send inquiry <span class="arrow">↗</span></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-slot"></div>
+<script src="shell.js?v=1776805947946"></script>
+<script>
+  document.querySelectorAll('.chips').forEach(group => {
+    const single = group.dataset.single === '1';
+    group.addEventListener('click', e => {
+      const c = e.target.closest('.chip');
+      if (!c) return;
+      if (single) group.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
+      c.classList.toggle('active');
+    });
+  });
+  document.getElementById('inquiry').addEventListener('submit', e => {
+    e.preventDefault();
+    const form = e.target;
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    form.style.display = 'none';
+    document.getElementById('thanks').classList.add('shown');
+    window.scrollTo({ top: document.getElementById('thanks').getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>

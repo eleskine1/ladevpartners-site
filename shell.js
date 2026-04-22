@@ -2,7 +2,7 @@
    Loaded after DOM. Populates placeholder elements and manages tweak state. */
 
 (() => {
-  // -- Shared bits --
+  // ── Shared bits ─────────────────────────────────
   const NAV = [
     ['Practice', 'practice.html'],
     ['Disciplines', 'disciplines.html'],
@@ -16,7 +16,7 @@
     return p.replace('.html', '');
   })();
 
-  // -- Nav --
+  // ── Nav ─────────────────────────────────────────
   const navHTML = `
     <nav class="nav" aria-label="Primary">
       <div class="nav-inner">
@@ -36,7 +36,7 @@
   const navSlot = document.getElementById('nav-slot');
   if (navSlot) navSlot.outerHTML = navHTML;
 
-  // -- Footer --
+  // ── Footer ──────────────────────────────────────
   const footerHTML = `
     <footer class="footer">
       <div class="container">
@@ -68,8 +68,8 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <div>&copy; MMXXVI &middot; LA Development Partners</div>
-          <div>Los Angeles &middot; 34.04&deg; N &middot; 118.24&deg; W</div>
+          <div>© MMXXVI · LA Development Partners</div>
+          <div>Los Angeles · 34.04° N · 118.24° W</div>
           <div>v.01 — Considered, always.</div>
         </div>
       </div>
@@ -78,7 +78,7 @@
   const footerSlot = document.getElementById('footer-slot');
   if (footerSlot) footerSlot.outerHTML = footerHTML;
 
-  // -- Placeholder helper --
+  // ── Placeholder helper ──────────────────────────
   document.querySelectorAll('[data-placeholder]').forEach(el => {
     if (!el.querySelector('.placeholder-label')) {
       const label = document.createElement('div');
@@ -89,21 +89,22 @@
     }
   });
 
-  // -- Reveal on scroll --
+  // ── Reveal on scroll ────────────────────────────
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // -- Tweaks --
-  const TWEAK_DEFAULTS = {
+  // ── Tweaks ──────────────────────────────────────
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     "theme": "light",
     "accent": "rust",
     "homeLayout": "A",
     "type": "sans",
     "worksView": "cards"
-  };
+  }/*EDITMODE-END*/;
 
+  // Load from session so cross-page nav keeps state
   let tweaks = { ...TWEAK_DEFAULTS };
   try {
     const saved = JSON.parse(sessionStorage.getItem('ladp-tweaks') || '{}');
@@ -128,7 +129,7 @@
   panel.innerHTML = `
     <div class="tweaks-head">
       <div class="tweaks-title">Tweaks</div>
-      <button class="tweaks-close" aria-label="Close">&times;</button>
+      <button class="tweaks-close" aria-label="Close">×</button>
     </div>
     <div class="tweaks-body">
       <div class="tweak-row">
@@ -158,9 +159,9 @@
       <div class="tweak-row">
         <div class="tweak-label">Home Hero Layout</div>
         <div class="tweak-choices" data-tweak="homeLayout">
-          <button class="tweak-btn" data-value="A">A &middot; Editorial</button>
-          <button class="tweak-btn" data-value="B">B &middot; Monumental</button>
-          <button class="tweak-btn" data-value="C">C &middot; Index</button>
+          <button class="tweak-btn" data-value="A">A · Editorial</button>
+          <button class="tweak-btn" data-value="B">B · Monumental</button>
+          <button class="tweak-btn" data-value="C">C · Index</button>
         </div>
       </div>` : ''}
       ${showWorksView ? `
@@ -194,16 +195,18 @@
       tweaks[key] = b.dataset.value;
       applyTweaks();
       syncActive();
+      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [key]: b.dataset.value } }, '*');
     }
     if (e.target.classList.contains('tweaks-close')) {
       panel.classList.remove('open');
+      window.parent.postMessage({ type: '__edit_mode_deactivated_by_page' }, '*');
     }
   });
 
-  // Toggle tweaks panel with keyboard shortcut (T key)
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 't' && !e.ctrlKey && !e.metaKey && e.target === document.body) {
-      panel.classList.toggle('open');
-    }
+  window.addEventListener('message', (e) => {
+    if (!e.data || typeof e.data !== 'object') return;
+    if (e.data.type === '__activate_edit_mode') panel.classList.add('open');
+    if (e.data.type === '__deactivate_edit_mode') panel.classList.remove('open');
   });
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
 })();

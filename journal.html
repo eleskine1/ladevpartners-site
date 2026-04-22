@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Journal — LA/DP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"/>
+<style>
+  .page-head { padding: 100px 0 60px; border-bottom: 1px solid var(--rule); }
+  .page-head-grid { display: grid; grid-template-columns: 260px 1fr; gap: 48px; align-items: baseline; }
+  .page-title { font-family: var(--f-edit); font-weight: 300; font-size: clamp(56px, 7vw, 120px); line-height: 0.95; letter-spacing: -0.03em; }
+  .lede { font-size: 20px; line-height: 1.5; color: var(--fg-soft); margin-top: 28px; max-width: 720px; }
+  .feature { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; padding: 80px 0; border-bottom: 1px solid var(--rule); }
+  .feature .meta-accent { color: var(--accent); }
+  .feature h2 { font-family: var(--f-edit); font-weight: 300; font-size: clamp(40px, 4.8vw, 72px); line-height: 1; letter-spacing: -0.03em; margin: 16px 0; }
+  .feature h2 i { font-style: italic; }
+  .feature .dek { font-size: 18px; line-height: 1.5; color: var(--fg-soft); max-width: 520px; }
+  .feature .img { aspect-ratio: 4/3; }
+
+  /* The Monthly */
+  .monthly { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; border-bottom: 1px solid var(--rule); background: var(--card); }
+  [data-theme="dark"] .monthly { background: rgba(244,241,234,0.03); }
+  .monthly-left { padding: 80px 64px 80px 0; border-right: 1px solid var(--rule); }
+  .monthly-right { padding: 80px 0 80px 64px; display: flex; flex-direction: column; justify-content: center; }
+  .monthly-cap { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.22em; color: var(--accent); }
+  .monthly-h { font-family: var(--f-edit); font-weight: 300; font-size: clamp(40px, 4.6vw, 72px); line-height: 1; letter-spacing: -0.03em; margin: 18px 0 20px; }
+  .monthly-h i { font-style: italic; }
+  .monthly-dek { font-size: 17px; line-height: 1.55; color: var(--fg-soft); max-width: 520px; margin-bottom: 28px; }
+  .monthly-issues { display: flex; gap: 24px; margin-top: 36px; }
+  .mi { flex: 1; padding: 16px 0; border-top: 1px solid var(--rule); }
+  .mi .mi-no { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.2em; color: var(--meta); }
+  .mi .mi-t { font-family: var(--f-edit); font-style: italic; font-size: 17px; line-height: 1.25; margin-top: 8px; color: var(--fg); }
+  .sub-form { display: flex; flex-direction: column; gap: 12px; max-width: 440px; }
+  .sub-form input { font-family: var(--f-display); font-size: 16px; padding: 14px 18px; border: 1px solid var(--rule-strong); background: var(--bg); color: var(--fg); border-radius: 4px; }
+  .sub-form input:focus { outline: none; border-color: var(--accent); }
+  .sub-form button { font-family: var(--f-display); font-weight: 500; font-size: 15px; padding: 14px 22px; background: var(--fg); color: var(--bg); border: 0; border-radius: 4px; cursor: pointer; transition: background .2s; }
+  .sub-form button:hover { background: var(--accent); color: var(--bone); }
+  .sub-fine { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.15em; color: var(--meta); text-transform: uppercase; margin-top: 4px; }
+  .sub-thanks { font-family: var(--f-edit); font-style: italic; font-size: 19px; color: var(--fg); padding: 14px 0; }
+  .jlist { padding: 40px 0; }
+  .j-row { display: grid; grid-template-columns: 140px 1fr 200px 120px; gap: 40px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--rule); cursor: pointer; transition: background .2s; }
+  .j-row:hover { background: var(--card); }
+  .j-row .tag { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; }
+  .j-row .t { font-family: var(--f-edit); font-weight: 300; font-style: italic; font-size: clamp(22px, 2.3vw, 32px); line-height: 1.1; letter-spacing: -0.025em; }
+  .j-row .a { font-family: var(--f-display); font-size: 13px; color: var(--fg-soft); }
+  .j-row .d { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.12em; color: var(--meta); text-align: right; }
+  .filter-bar { display: flex; gap: 10px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+  .filter-bar .meta { margin-right: auto; align-self: center; }
+  .fbtn { font-family: var(--f-display); font-size: 13px; padding: 8px 14px; border: 1px solid var(--rule-strong); background: transparent; color: var(--fg); border-radius: 999px; cursor: pointer; }
+  .fbtn.active { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+</style>
+</head>
+<body>
+<div id="nav-slot"></div>
+
+<header class="page-head">
+  <div class="container">
+    <div class="page-head-grid">
+      <div class="meta"><span class="meta-accent">§ 005</span> · JOURNAL</div>
+      <div>
+        <h1 class="page-title">Field notes,<br/><i>on the record.</i></h1>
+        <div class="lede">Occasional writing on method, on the city, on the work. Infrequent — as a practice of its own.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+
+    <div class="feature">
+      <div>
+        <div class="meta meta-accent">J · 014 · ON METHOD · APRIL MMXXVI</div>
+        <h2>Measure twice,<br/><i>cut once.</i></h2>
+        <div class="dek">Why we settle our decisions before we settle our lumber — and what thorough planning earns back at handover. A set of notes, written for an owner considering a first build.</div>
+        <a href="#" class="btn btn-ghost" style="margin-top:28px;">Read <span class="arrow">↗</span></a>
+      </div>
+      <div class="img placeholder" data-placeholder="FEATURE · J 014"></div>
+    </div>
+
+    <!-- ── The Monthly ──────────────────────────────── -->
+    <div class="monthly">
+      <div class="monthly-left">
+        <div class="monthly-cap">· THE MONTHLY · A CURATED LETTER</div>
+        <h2 class="monthly-h">Projects and works,<br/><i>on loan.</i></h2>
+        <div class="monthly-dek">Once a month we gather the buildings, drawings, and objects that have taught us something that month. Most are not our own — credit is given where it's due. Delivered quietly, to your inbox, on the first of the month.</div>
+        <form class="sub-form" id="sub-form" novalidate>
+          <input type="email" name="email" placeholder="you@somewhere.com" required />
+          <button type="submit">Subscribe to The Monthly <span class="arrow">↗</span></button>
+          <div class="sub-fine">No promotion. One letter a month. Unsubscribe anytime.</div>
+        </form>
+      </div>
+      <div class="monthly-right">
+        <div class="meta" style="color:var(--accent); margin-bottom:14px;">· RECENT ISSUES</div>
+        <div class="mi">
+          <div class="mi-no">Vol. 007 · MARCH MMXXVI</div>
+          <div class="mi-t">On plaster, patience, and a house in Brentwood by a firm we admire.</div>
+        </div>
+        <div class="mi">
+          <div class="mi-no">Vol. 006 · FEBRUARY MMXXVI</div>
+          <div class="mi-t">A market hall in Copenhagen. A chair by Nakashima. A detail we stole, happily.</div>
+        </div>
+        <div class="mi">
+          <div class="mi-no">Vol. 005 · JANUARY MMXXVI</div>
+          <div class="mi-t">Three adaptive-reuse projects that earned their lives twice.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="meta">13 PREVIOUS ENTRIES</div>
+      <button class="fbtn active">All</button>
+      <button class="fbtn">Method</button>
+      <button class="fbtn">On LA</button>
+      <button class="fbtn">Partners</button>
+      <button class="fbtn">Underwriting</button>
+    </div>
+
+    <div class="jlist">
+      <div class="j-row"><div class="tag">ON PARTNERS</div><div class="t">A network, not a rolodex.</div><div class="a">Elijah Leskinen</div><div class="d">MAR · MMXXVI</div></div>
+      <div class="j-row"><div class="tag">ON LA</div><div class="t">Reading the room at LADBS.</div><div class="a">Andrew Altman</div><div class="d">MAR · MMXXVI</div></div>
+      <div class="j-row"><div class="tag">UNDERWRITING</div><div class="t">A proforma you can read to your mother.</div><div class="a">Austin Nissly</div><div class="d">FEB · MMXXVI</div></div>
+      <div class="j-row"><div class="tag">METHOD</div><div class="t">One table, one story, one schedule.</div><div class="a">Elijah Leskinen</div><div class="d">JAN · MMXXVI</div></div>
+      <div class="j-row"><div class="tag">ON LA</div><div class="t">The hillside problem, and the hillside <i>opportunity.</i></div><div class="a">Andrew Altman</div><div class="d">DEC · MMXXV</div></div>
+      <div class="j-row"><div class="tag">METHOD</div><div class="t">Why we price twice and build once.</div><div class="a">Elijah Leskinen</div><div class="d">NOV · MMXXV</div></div>
+      <div class="j-row"><div class="tag">UNDERWRITING</div><div class="t">The soft number, and when to say so.</div><div class="a">Austin Nissly</div><div class="d">OCT · MMXXV</div></div>
+      <div class="j-row"><div class="tag">ON PARTNERS</div><div class="t">How a partnered builder outperforms a stranger with a better bid.</div><div class="a">Matt Carney</div><div class="d">SEP · MMXXV</div></div>
+      <div class="j-row"><div class="tag">METHOD</div><div class="t">What a good RFP is for.</div><div class="a">Elijah Leskinen</div><div class="d">AUG · MMXXV</div></div>
+      <div class="j-row"><div class="tag">ON LA</div><div class="t">Coastal Commission, <i>patiently.</i></div><div class="a">Andrew Altman</div><div class="d">JUL · MMXXV</div></div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Subscribe form — local, no backend
+  const subForm = document.getElementById('sub-form');
+  if (subForm) {
+    subForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = subForm.email.value.trim();
+      if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+        subForm.email.focus();
+        subForm.email.style.borderColor = 'var(--accent)';
+        return;
+      }
+      subForm.innerHTML = `<div class="sub-thanks">Considered. You'll receive the next issue on the first of the month.</div><div class="sub-fine">Subscribed as <b style="color:var(--fg);">${email}</b></div>`;
+    });
+  }
+</script>
+
+<div id="footer-slot"></div>
+<script src="shell.js?v=1776805947946"></script>
+</body>
+</html>

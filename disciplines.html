@@ -26,6 +26,26 @@
   [data-theme="dark"] .not-gcs .meta { color: var(--meta); }
   .not-gcs h2 { font-family: var(--f-edit); font-weight: 300; font-size: clamp(44px, 5.2vw, 88px); line-height: 0.98; letter-spacing: -0.03em; margin: 0; }
   .not-gcs p { font-size: 17px; line-height: 1.65; max-width: 680px; margin: 28px 0 0; opacity: 0.85; }
+
+  @media (max-width: 768px) {
+    .page-head { padding: 60px 0 40px; }
+    .page-head-grid { grid-template-columns: 1fr; gap: 14px; }
+    .page-title { font-size: clamp(36px, 9vw, 56px); }
+    .lede { font-size: 17px; margin-top: 20px; }
+    .disc-row { grid-template-columns: 1fr; gap: 16px; padding: 36px 0; }
+    .disc-num { padding-top: 0; }
+    .disc-name { font-size: clamp(28px, 5vw, 42px); }
+    .disc-scope { flex-direction: row; gap: 12px; text-align: left; min-width: auto; padding-top: 8px; }
+    .not-gcs { padding: 60px 0; margin: 60px 0; }
+    .not-gcs .container { grid-template-columns: 1fr; gap: 14px; }
+    .not-gcs h2 { font-size: clamp(36px, 8vw, 56px); }
+  }
+
+  @media (max-width: 480px) {
+    .page-title { font-size: 36px; }
+    .disc-name { font-size: 28px; }
+    .disc-scope { flex-wrap: wrap; }
+  }
 </style>
 </head>
 <body>

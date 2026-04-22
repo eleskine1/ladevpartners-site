@@ -44,6 +44,26 @@
   .thanks h2 { font-family: var(--f-edit); font-weight: 300; font-size: 48px; line-height: 1; letter-spacing: -0.025em; margin: 0 0 20px; }
   .thanks h2 i { font-style: italic; }
   .thanks p { font-size: 17px; line-height: 1.6; color: var(--fg-soft); max-width: 520px; }
+
+  @media (max-width: 768px) {
+    .page-head { padding: 60px 0 40px; }
+    .page-head-grid { grid-template-columns: 1fr; gap: 14px; }
+    .page-title { font-size: clamp(36px, 9vw, 56px); }
+    .lede { font-size: 17px; }
+    .form-grid { grid-template-columns: 1fr; gap: 40px; padding: 40px 0 80px; }
+    form { grid-template-columns: 1fr; }
+    .field.right { padding-left: 0; border-left: 0; }
+    .chip { padding: 12px 18px; min-height: 44px; display: inline-flex; align-items: center; }
+    .submit-row { flex-direction: column; gap: 20px; align-items: flex-start; }
+    .submit-btn { width: 100%; justify-content: center; min-height: 48px; }
+    .field input, .field select, .field textarea { font-size: 16px; }
+    .thanks h2 { font-size: 36px; }
+  }
+
+  @media (max-width: 480px) {
+    .page-title { font-size: 36px; }
+    .form-aside .quote { font-size: 18px; padding: 20px; }
+  }
 </style>
 </head>
 <body>

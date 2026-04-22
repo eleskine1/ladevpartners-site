@@ -89,6 +89,41 @@
   .inquiry-close .btn { border-color: currentColor; color: inherit; }
   .inquiry-close .btn:hover { background: var(--bone); color: var(--ink); border-color: var(--bone); }
   [data-theme="dark"] .inquiry-close .btn:hover { background: var(--ink); color: var(--bone); }
+
+  /* Extracted from inline styles for responsive override */
+  .hero-a .hero-a-mark { font-size: 100.36px; padding-top: 100px; padding-bottom: 0; }
+  .hero-a .hero-a-tag { font-size: 90px; }
+  .hero-c .wm { font-size: 72px; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 40px 0 60px; }
+    .hero-a .hero-a-mark { font-size: 52px; padding-top: 40px; }
+    .hero-a .hero-a-tag { font-size: 40px; }
+    .hero-a-inner { grid-template-columns: 1fr; gap: 32px; }
+    .hero-a-meta { grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 40px; }
+    .hero-b-sub { grid-template-columns: 1fr; gap: 24px; }
+    .hero-c-inner { grid-template-columns: 1fr; gap: 20px; }
+    .hero-c .wm { font-size: 56px; }
+    .hero-c-row { grid-template-columns: 60px 1fr; gap: 12px; }
+    .hero-c-row > :nth-child(3) { grid-column: 1 / -1; }
+    .disc-grid { grid-template-columns: repeat(2, 1fr); }
+    .disc-cell:nth-child(odd) { border-right: 1px solid var(--rule); }
+    .disc-cell:nth-child(even) { border-right: 0; }
+    .disc-cell { min-height: 180px; }
+    .works-strip { grid-template-columns: 1fr; gap: 40px; }
+    .practice-band { grid-template-columns: 1fr; gap: 32px; }
+    .journal-list { grid-template-columns: 1fr; gap: 28px; }
+    .inquiry-close { padding: 80px 0; margin-top: 80px; }
+    .inquiry-close .container { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-a .hero-a-mark { font-size: 42px; padding-top: 28px; }
+    .hero-a .hero-a-tag { font-size: 32px; }
+    .hero-c .wm { font-size: 48px; }
+    .disc-grid { grid-template-columns: 1fr; }
+    .disc-cell { border-right: 0; min-height: auto; }
+  }
 </style>
 </head>
 <body>
@@ -102,10 +137,10 @@
       <div class="meta"><span class="meta-accent">§ 001</span> · THE PRACTICE</div>
       <div class="meta">LOS ANGELES — EST. MMXXV</div>
     </div>
-    <div class="hero-a-mark" style="font-size: 100.36px; line-height: 0.92; padding-top: 100px; padding-bottom: 0;">LA<br/>development<br/>partners<span class="dot">.</span></div>
+    <div class="hero-a-mark">LA<br/>development<br/>partners<span class="dot">.</span></div>
     <div class="hero-a-inner">
       <div>
-        <div class="hero-a-tag" style="font-size: 90px;">A practice in<br/><i class="italic">building well.</i></div>
+        <div class="hero-a-tag">A practice in<br/><i class="italic">building well.</i></div>
         <div class="body-lg" style="max-width:440px; margin-top:32px;">
           Los Angeles construction management — considered from sketch to structure. Residential, commercial, and everything between.
         </div>
@@ -152,7 +187,7 @@
     <div class="meta" style="padding-bottom:40px; border-bottom:1px solid var(--rule);"><span class="meta-accent">§ 001</span> · INDEX — IN PRACTICE, APRIL MMXXVI</div>
     <div class="hero-c-inner">
       <div>
-        <div class="wm" style="font-size:72px;">LA<span class="dot">.</span></div>
+        <div class="wm">LA<span class="dot">.</span></div>
         <div class="meta" style="margin-top:14px;">DEVELOPMENT<br/>PARTNERS<span class="dot">.</span></div>
       </div>
       <div class="hero-c-list">

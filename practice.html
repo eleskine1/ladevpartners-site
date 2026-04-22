@@ -47,6 +47,34 @@
     .tl-row { grid-template-columns: 1fr; gap: 10px; }
     .tl-m { display: none; }
   }
+
+  @media (max-width: 768px) {
+    .page-head { padding: 60px 0 48px; }
+    .page-head-grid { grid-template-columns: 1fr; gap: 14px; }
+    .page-title { font-size: clamp(36px, 9vw, 56px); }
+    .lede { font-size: 18px; margin-top: 24px; }
+    .text-body { padding: 48px 0; }
+    .who-grid { grid-template-columns: 1fr; }
+    .who-col { border-right: 0; border-bottom: 1px solid var(--rule); padding: 28px 0; }
+    .who-col:last-child { border-bottom: 0; }
+    .principles { grid-template-columns: 1fr; }
+    .principle { border-right: 0; }
+    .principle h3 { font-size: 28px; }
+    .partners-grid { grid-template-columns: repeat(2, 1fr); }
+    .partner:nth-child(2n) { border-right: 0; }
+    .partner:nth-child(odd) { border-right: 1px solid var(--rule); }
+    .people { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .tl-yr { font-size: 11px; }
+  }
+
+  @media (max-width: 480px) {
+    .page-title { font-size: 36px; }
+    .partners-grid { grid-template-columns: 1fr; }
+    .partner { border-right: 0; }
+    .partner:nth-child(odd) { border-right: 0; }
+    .people { grid-template-columns: 1fr; gap: 32px; }
+    .principle h3 { font-size: 24px; }
+  }
 </style>
 </head>
 <body>

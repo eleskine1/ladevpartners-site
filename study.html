@@ -41,6 +41,31 @@
   .nav-next a { display: flex; justify-content: space-between; align-items: baseline; padding: 20px; border: 1px solid var(--rule); transition: background .2s; }
   .nav-next a:hover { background: var(--card); }
   .nav-next .t { font-family: var(--f-edit); font-weight: 300; font-style: italic; font-size: 24px; letter-spacing: -0.02em; }
+
+  @media (max-width: 768px) {
+    .study-head { padding: 48px 0 28px; }
+    .study-grid { grid-template-columns: 1fr; gap: 28px; }
+    .study-title { font-size: clamp(44px, 10vw, 80px); }
+    .facts { grid-template-columns: 1fr; gap: 20px; padding: 24px 0; }
+    .hero-img { margin: 28px 0 48px; }
+    .body-col { padding: 40px 0; }
+    .body-col .container > div,
+    div[style*="grid-template-columns:260px"] { grid-template-columns: 1fr !important; gap: 14px !important; }
+    .body-col .h { font-size: clamp(28px, 6vw, 40px); }
+    .pair-grid { grid-template-columns: 1fr; gap: 24px; padding: 40px 0; }
+    .numbers { grid-template-columns: repeat(2, 1fr); }
+    .num-cell .v { font-size: 40px; }
+    .pull { padding: 48px 0; }
+    .pull blockquote { font-size: clamp(24px, 5vw, 40px); }
+    .nav-next { grid-template-columns: 1fr; gap: 16px; padding: 48px 0; }
+    .nav-next .t { font-size: 20px; }
+  }
+
+  @media (max-width: 480px) {
+    .study-title { font-size: 44px; }
+    .numbers { grid-template-columns: 1fr 1fr; }
+    .num-cell .v { font-size: 36px; }
+  }
 </style>
 </head>
 <body>

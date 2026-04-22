@@ -30,11 +30,35 @@
             return `<a class="nav-link" href="${h}"${cur}>${t}</a>`;
           }).join('')}
         </div>
+        <button class="nav-toggle" aria-label="Open menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+        </button>
       </div>
     </nav>
   `;
   const navSlot = document.getElementById('nav-slot');
   if (navSlot) navSlot.outerHTML = navHTML;
+
+  // Mobile nav overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'nav-overlay';
+  overlay.innerHTML = `
+    <button class="nav-overlay-close" aria-label="Close menu">\u00d7</button>
+    ${NAV.map(([t, h]) => {
+      const slug = h.replace('.html','');
+      const cur = (currentPage === slug || (currentPage === 'study' && slug === 'works')) ? ' aria-current="page"' : '';
+      return `<a class="nav-overlay-link" href="${h}"${cur}>${t}</a>`;
+    }).join('')}
+    <div class="nav-overlay-meta">LA/DP — 001 · EST. MMXXV</div>
+  `;
+  document.body.appendChild(overlay);
+
+  const navToggle = document.querySelector('.nav-toggle');
+  const overlayClose = overlay.querySelector('.nav-overlay-close');
+  if (navToggle) navToggle.addEventListener('click', () => overlay.classList.add('open'));
+  if (overlayClose) overlayClose.addEventListener('click', () => overlay.classList.remove('open'));
+  overlay.querySelectorAll('.nav-overlay-link').forEach(l => l.addEventListener('click', () => overlay.classList.remove('open')));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') overlay.classList.remove('open'); });
 
   // ── Footer ──────────────────────────────────────
   const footerHTML = `

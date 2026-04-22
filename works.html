@@ -53,6 +53,25 @@
   .card-scope { font-family: var(--f-edit); font-style: italic; font-size: 14px; color: var(--fg-soft); max-width: 380px; }
   .card-rule { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--rule); }
   .card-rule .meta { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.18em; }
+
+  @media (max-width: 768px) {
+    .page-head { padding: 60px 0 28px; }
+    .page-head-grid { grid-template-columns: 1fr; gap: 14px; }
+    .page-title { font-size: clamp(36px, 9vw, 56px); }
+    .lede { font-size: 17px; }
+    .view-switch { display: none; }
+    .view { display: none; }
+    [data-works-view] .view-editorial,
+    [data-works-view] .view-large { display: none; }
+    [data-works-view] .view-cards,
+    .view-cards { display: block; }
+    .cards-grid { grid-template-columns: 1fr; gap: 32px; }
+    .card-title { font-size: 20px; }
+  }
+
+  @media (max-width: 480px) {
+    .page-title { font-size: 36px; }
+  }
 </style>
 </head>
 <body>

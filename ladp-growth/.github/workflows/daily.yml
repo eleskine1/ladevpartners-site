@@ -1,0 +1,23 @@
+name: daily-pipeline
+on:
+  schedule:
+    - cron: "0 14 * * 1-5"   # 6am PT weekdays
+  workflow_dispatch: {}
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - run: python -m src.ingest
+      - run: python -m src.enrich
+      - run: python -m src.score
+      - name: Commit updated targets
+        run: |
+          git config user.name "ladp-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/scored/ && git commit -m "daily targets $(date +%F)" || true
+          git push

@@ -1,0 +1,74 @@
+# LADP Growth -- Ideal Client Profile & scoring config v1
+# >>> THIS IS THE FILE ELI APPROVES / EDITS. Everything downstream reads it. <<<
+
+geography:
+  primary:        # full weight
+    - Los Angeles (city)
+    - Santa Monica
+    - Pasadena
+    - Burbank
+    - Glendale
+    - Culver City
+  secondary:      # 0.7x weight
+    - LA County unincorporated
+    - Long Beach
+    - West Hollywood
+
+project_floor:
+  min_valuation_usd: 1_000_000     # ignore below this
+  min_units: 5                      # OR-condition with valuation
+  sweet_spot_valuation_usd: 3_000_000   # full points at/above
+
+owner_profile:
+  strong:   [LLC, LP, LTD, TRUST_INVESTOR, REIT, CORP]
+  weak:     [INDIVIDUAL_OWNER_OCCUPANT]
+  portfolio_bonus_threshold: 3      # parcels under same owner/mailing addr
+
+intent_signals:                     # points (max one primary per prospect)
+  entitled_not_permitted_6mo:    40 # pre-construction DM window
+  permit_stalled_no_inspections: 35 # construction rescue / owner's rep swap
+  palisades_fire_rebuild:        35 # high-value SFR rebuild, owner needs a guide
+  ed1_tocdb_pipeline:            30 # affordable/density bonus sponsors
+  sb1211_adu_capacity:           30 # proactive: 8+ units, room for 8 ADUs
+  large_permit_issued_30d:       25 # relationship window
+  soft_story_sb721_deadline:     20 # compliance-driven, volume play
+
+fit_signals:                        # additive
+  valuation_over_sweet_spot:    20
+  investor_entity_owner:        15
+  portfolio_owner_3plus:        15
+  rebuild_valuation_2m_plus:    15  # Palisades: bigger custom rebuilds
+  units_10_plus:                10
+  units_25_plus:                10  # stacks
+  repeat_developer_no_gc_arm:   10
+  adu_capacity_12_plus:         10  # yard fits 12+ ADUs pre-cap
+  rso_exempt_or_post78:         10  # cleaner SB 1211 execution
+  home_turf_city:               5
+
+segment_params:
+  palisades:
+    zips: ["90272"]
+    min_valuation_usd: 1_500_000
+    keywords: ["FIRE", "REBUILD", "REPLACE", "DAMAGED"]
+  adu_capacity:
+    min_existing_units: 8
+    min_buildable_yard_sqft: 5000   # ~8 detached ADUs @ ~500sf + circulation
+    adu_footprint_sqft: 500
+    multifamily_use_codes: ["0500", "05", "APARTMENT"]  # verify vs roll codes
+
+decay:
+  points_per_90d: 5
+  max_age_days: 720
+
+tiers:
+  A: 75    # personal letter + Eli follow-up call
+  B: 55    # Lob letter + email sequence
+  C: 40    # email-only nurture / quarterly mail
+  ignore_below: 40
+
+exclusions:
+  - owner matches known GC / vertically integrated developer list (data/gc_list.csv)
+  - existing clients & LWK-related entities (data/suppression.csv)
+  - projects with LADP/ADU Builder LA as applicant of record
+  - single-family additions/remodels regardless of valuation (Palisades segment exempt)
+  - solar / EV / pool / sign permit classes

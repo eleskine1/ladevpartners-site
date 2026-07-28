@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Two bids are never the same bid · Journal · LA/DP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"/>
+<style>
+  .art-head { padding: 90px 0 48px; border-bottom: 1px solid var(--rule); }
+  .crumb { display: flex; gap: 14px; align-items: center; margin-bottom: 40px; }
+  .art-title { font-family: var(--f-edit); font-weight: 300; font-size: clamp(44px, 6vw, 96px); line-height: 0.98; letter-spacing: -0.03em; max-width: 1000px; }
+  .art-title i { font-style: italic; }
+  .art-dek { font-size: 20px; line-height: 1.5; color: var(--fg-soft); margin-top: 26px; max-width: 720px; }
+  .art-byline { display: flex; gap: 24px; margin-top: 36px; }
+  .art-byline .meta b { color: var(--fg); font-weight: 500; }
+  .art-body { padding: 64px 0 40px; }
+  .art-body .art-grid { display: grid; grid-template-columns: 260px 1fr; gap: 48px; }
+  .art-prose { max-width: 720px; }
+  .art-prose p { font-size: 17px; line-height: 1.75; color: var(--fg-soft); margin: 0 0 22px; }
+  .art-prose p.lead { font-family: var(--f-display); font-weight: 400; font-size: 21px; color: var(--fg); letter-spacing: -0.01em; }
+  .art-prose h3 { font-family: var(--f-edit); font-weight: 300; font-size: 32px; letter-spacing: -0.02em; margin: 44px 0 16px; }
+  .art-prose h3 i { font-style: italic; }
+  .art-note { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.16em; color: var(--meta); text-transform: uppercase; border-top: 1px solid var(--rule); padding-top: 20px; margin-top: 48px; line-height: 1.8; }
+  .nav-next { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 60px 0; border-top: 1px solid var(--rule); }
+  .nav-next a { display: flex; justify-content: space-between; align-items: baseline; padding: 20px; border: 1px solid var(--rule); transition: background .2s; }
+  .nav-next a:hover { background: var(--card); }
+  .nav-next .t { font-family: var(--f-edit); font-weight: 300; font-style: italic; font-size: 22px; letter-spacing: -0.02em; }
+  @media (max-width: 768px) {
+    .art-head { padding: 56px 0 32px; }
+    .art-body .art-grid { grid-template-columns: 1fr; gap: 20px; }
+    .art-dek { font-size: 17px; }
+    .nav-next { grid-template-columns: 1fr; gap: 16px; padding: 40px 0; }
+  }
+</style>
+</head>
+<body>
+<div id="nav-slot"></div>
+
+<section class="art-head">
+  <div class="container">
+    <div class="crumb">
+      <a class="meta" href="journal.html">← JOURNAL</a>
+      <div class="meta" style="color:var(--meta)">·</div>
+      <div class="meta"><span class="meta-accent">J · 002 · METHOD</span> · JUNE MMXXVI</div>
+    </div>
+    <h1 class="art-title">Two bids are never <i>the same bid.</i></h1>
+    <div class="art-dek">On leveling: why the lowest number on paper and the lowest cost of the finished project are two different figures, and how a scope matrix closes the distance.</div>
+    <div class="art-byline">
+      <div class="meta">BY <b>ELIJAH LESKINEN</b></div>
+      <div class="meta">MANAGING PRINCIPAL</div>
+    </div>
+  </div>
+</section>
+
+<section class="art-body">
+  <div class="container">
+    <div class="art-grid">
+      <div class="meta">§ · THE ESSAY</div>
+      <div class="art-prose">
+        <p class="lead">Put two general contractors' proposals side by side and the numbers will sit there looking comparable. They are almost never comparable. They are two different projects wearing the same address.</p>
+        <p>We recently leveled bids for an envelope project: waterproofing and a full window replacement for a homeowners association. One builder's number included the interior drywall repairs and the planter drainage work. The other's number excluded both, and recommended expanding the window scope building-wide. Both proposals were professional. Both were internally coherent. Neither could be compared to the other on its bottom line, and a board choosing on price alone would have chosen blind.</p>
+        <h3>Scope is the <i>real bid</i></h3>
+        <p>The discipline is unglamorous. You build a leveling matrix: every line of work the project could plausibly contain, down the left side. Every bidder across the top. Then you fill it in, from their documents and their answers, not from your hopes. Included, excluded, allowance, alternate, or silent. Silence is the important one. What a proposal does not mention is where the change orders live.</p>
+        <h3>Exclusions are <i>information</i></h3>
+        <p>An exclusion is not a flaw. It is often the most honest line in the document, a builder telling you precisely where their number stops. The danger is never the stated exclusion. It is the unexamined assumption that the other bidder's number stops in the same place.</p>
+        <h3>The cheap bid and the <i>low bid</i></h3>
+        <p>Once the matrix is filled, you price the gaps. Add to each proposal the cost of everything it omits that the project will require anyway. The ranking that emerges is frequently different from the ranking on the cover letters, and it is the only ranking that means anything. The lowest number on paper and the lowest cost of the finished project are two different figures, and the distance between them is exactly what an owner pays a construction manager to know.</p>
+        <p>None of this requires genius. It requires the patience to hold every scope line in one place, and the willingness to send both builders the same list of questions and wait for written answers. Measured against a single mid-project dispute, it is the cheapest work we do.</p>
+
+        <div class="art-note">General commentary on California and Los Angeles-area regulations as the practice understands them at the time of writing. Rules change and every parcel is different. Nothing here is legal advice, and nothing here replaces a feasibility review of your actual property.</div>
+      </div>
+    </div>
+    <div class="nav-next">
+      <a href="journal-jadu.html"><span class="t">The ten-thousand-dollar JADU.</span><span class="meta">READ ↗</span></a>
+      <a href="contact.html"><span class="t">Begin an inquiry</span><span class="meta">INQUIRE ↗</span></a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-slot"></div>
+<script src="shell.js?v=1776805947946"></script>
+</body>
+</html>

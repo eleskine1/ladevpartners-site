@@ -1,4 +1,4 @@
-/* LA/DP site shell — tokens, type, nav, footer.
+/* LA/DP site shell: tokens, type, nav, footer.
    Shared by all pages. Tweaks rewrite CSS variables on :root. */
 
 :root {
@@ -161,7 +161,7 @@ a:hover .arrow, .btn:hover .arrow { transform: translate(3px, -3px); }
 .tweak-swatch { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--rule-strong); cursor: pointer; padding: 0; }
 .tweak-swatch.active { box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--fg); }
 
-/* Reveal on scroll — subtle */
+/* Reveal on scroll: subtle */
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
 .reveal.in { opacity: 1; transform: translateY(0); }
 

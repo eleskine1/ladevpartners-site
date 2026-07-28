@@ -1,4 +1,4 @@
-/* LA/DP site shell — shared nav, footer, tweaks wiring.
+/* LA/DP site shell: shared nav, footer, tweaks wiring.
    Loaded after DOM. Populates placeholder elements and manages tweak state. */
 
 (() => {
@@ -26,7 +26,7 @@
         <div class="nav-links">
           ${NAV.map(([t, h]) => {
             const slug = h.replace('.html','');
-            const cur = (currentPage === slug || (currentPage === 'study' && slug === 'works')) ? ' aria-current="page"' : '';
+            const cur = (currentPage === slug || (currentPage === 'study' && slug === 'works') || (currentPage.startsWith('journal-') && slug === 'journal')) ? ' aria-current="page"' : '';
             return `<a class="nav-link" href="${h}"${cur}>${t}</a>`;
           }).join('')}
         </div>
@@ -46,10 +46,10 @@
     <button class="nav-overlay-close" aria-label="Close menu">\u00d7</button>
     ${NAV.map(([t, h]) => {
       const slug = h.replace('.html','');
-      const cur = (currentPage === slug || (currentPage === 'study' && slug === 'works')) ? ' aria-current="page"' : '';
+      const cur = (currentPage === slug || (currentPage === 'study' && slug === 'works') || (currentPage.startsWith('journal-') && slug === 'journal')) ? ' aria-current="page"' : '';
       return `<a class="nav-overlay-link" href="${h}"${cur}>${t}</a>`;
     }).join('')}
-    <div class="nav-overlay-meta">LA/DP — 001 · EST. MMXXV</div>
+    <div class="nav-overlay-meta">LA/DP · 001 · EST. MMXXV</div>
   `;
   document.body.appendChild(overlay);
 
@@ -67,7 +67,7 @@
         <div class="footer-grid">
           <div>
             <div class="footer-head">A practice in<br/><i>building well.</i></div>
-            <div class="meta" style="margin-top:28px;">LA/DP — 001 · EST. MMXXV</div>
+            <div class="meta" style="margin-top:28px;">LA/DP · 001 · EST. MMXXV</div>
           </div>
           <div>
             <div class="footer-col-title">The Practice</div>
@@ -78,23 +78,21 @@
           </div>
           <div>
             <div class="footer-col-title">Office</div>
-            <div class="footer-link">520 Broadway, 2nd Floor</div>
-            <div class="footer-link">Santa Monica, CA 90401</div>
-            <a class="footer-link" href="mailto:hello@ladevpartners.com">hello@ladevpartners.com</a>
-            <div class="footer-link">+1 213 555 0114</div>
+            <div class="footer-link">Los Angeles, California</div>
+            <div class="footer-link">By appointment</div>
+            <a class="footer-link" href="mailto:info@ladevpartners.com">info@ladevpartners.com</a>
           </div>
           <div>
             <div class="footer-col-title">Elsewhere</div>
-            <a class="footer-link" href="#">Instagram</a>
-            <a class="footer-link" href="#">LinkedIn</a>
-            <a class="footer-link" href="#">Press</a>
-            <a class="footer-link" href="contact.html">Apprenticeship</a>
+            <a class="footer-link" href="https://www.linkedin.com/in/elijahleskinen/" rel="noopener" target="_blank">LinkedIn</a>
+            <a class="footer-link" href="journal.html">Journal</a>
+            <a class="footer-link" href="contact.html">Inquire</a>
           </div>
         </div>
         <div class="footer-bottom">
           <div>© MMXXVI · LA Development Partners</div>
           <div>Los Angeles · 34.04° N · 118.24° W</div>
-          <div>v.01 — Considered, always.</div>
+          <div>v.02 · Considered, always.</div>
         </div>
       </div>
     </footer>

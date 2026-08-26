@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The second price of the building · Journal · LA/DP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"/>
+<style>
+  .art-head { padding: 90px 0 48px; border-bottom: 1px solid var(--rule); }
+  .crumb { display: flex; gap: 14px; align-items: center; margin-bottom: 40px; }
+  .art-title { font-family: var(--f-edit); font-weight: 300; font-size: clamp(44px, 6vw, 96px); line-height: 0.98; letter-spacing: -0.03em; max-width: 1000px; }
+  .art-title i { font-style: italic; }
+  .art-dek { font-size: 20px; line-height: 1.5; color: var(--fg-soft); margin-top: 26px; max-width: 720px; }
+  .art-byline { display: flex; gap: 24px; margin-top: 36px; }
+  .art-byline .meta b { color: var(--fg); font-weight: 500; }
+  .art-body { padding: 64px 0 40px; }
+  .art-body .art-grid { display: grid; grid-template-columns: 260px 1fr; gap: 48px; }
+  .art-prose { max-width: 720px; }
+  .art-prose p { font-size: 17px; line-height: 1.75; color: var(--fg-soft); margin: 0 0 22px; }
+  .art-prose p.lead { font-family: var(--f-display); font-weight: 400; font-size: 21px; color: var(--fg); letter-spacing: -0.01em; }
+  .art-prose h3 { font-family: var(--f-edit); font-weight: 300; font-size: 32px; letter-spacing: -0.02em; margin: 44px 0 16px; }
+  .art-prose h3 i { font-style: italic; }
+  .art-note { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.16em; color: var(--meta); text-transform: uppercase; border-top: 1px solid var(--rule); padding-top: 20px; margin-top: 48px; line-height: 1.8; }
+  .nav-next { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 60px 0; border-top: 1px solid var(--rule); }
+  .nav-next a { display: flex; justify-content: space-between; align-items: baseline; padding: 20px; border: 1px solid var(--rule); transition: background .2s; }
+  .nav-next a:hover { background: var(--card); }
+  .nav-next .t { font-family: var(--f-edit); font-weight: 300; font-style: italic; font-size: 22px; letter-spacing: -0.02em; }
+  @media (max-width: 768px) {
+    .art-head { padding: 56px 0 32px; }
+    .art-body .art-grid { grid-template-columns: 1fr; gap: 20px; }
+    .art-dek { font-size: 17px; }
+    .nav-next { grid-template-columns: 1fr; gap: 16px; padding: 40px 0; }
+  }
+</style>
+</head>
+<body>
+<div id="nav-slot"></div>
+
+<section class="art-head">
+  <div class="container">
+    <div class="crumb">
+      <a class="meta" href="journal.html">← JOURNAL</a>
+      <div class="meta" style="color:var(--meta)">·</div>
+      <div class="meta"><span class="meta-accent">J · 003 · UNDERWRITING</span> · JULY MMXXVI</div>
+    </div>
+    <h1 class="art-title">The second price <i>of the building.</i></h1>
+    <div class="art-dek">Every commercial building has two prices: the one on the purchase agreement, and the one hiding in its systems. Notes on capex diligence, for owners deciding what a building will really cost to hold.</div>
+    <div class="art-byline">
+      <div class="meta">BY <b>ELIJAH LESKINEN</b></div>
+      <div class="meta">MANAGING PRINCIPAL</div>
+    </div>
+  </div>
+</section>
+
+<section class="art-body">
+  <div class="container">
+    <div class="art-grid">
+      <div class="meta">§ · THE ESSAY</div>
+      <div class="art-prose">
+        <p class="lead">A property condition report is where capex diligence begins. It is a poor place for it to end.</p>
+        <p>A PCR is a snapshot taken by a consultant on a schedule, priced by rules of thumb, and hedged by its own limiting conditions. It is useful. It is not the number. When an owner treats the report's summary table as a budget, the building eventually corrects them, and buildings correct expensively.</p>
+        <h3>Reconcile the reports <i>against each other</i></h3>
+        <p>Buildings of any age tend to accumulate more than one assessment: an older PCR, a newer one, a seismic screening, a vendor proposal or two. They will not agree. The discipline is to reconcile them line by line and decide, for each item, which document governs and why. A newer report does not automatically win; it wins where its scope was actually deeper. Where two reports disagree on the same system, that disagreement is not noise. It is a question to be answered before close, not after.</p>
+        <h3>Verified numbers and <i>reconstructed ones</i></h3>
+        <p>In our own capex workbooks, every figure carries one of two labels: verified, meaning it traces to a document we can produce, or reconstructed, meaning it is our estimate built from stated assumptions. The label travels with the number everywhere it goes. This sounds like bookkeeping. It is actually the whole game, because the failure mode in capex planning is a soft number that hardens through repetition until someone borrows against it.</p>
+        <h3>The systems that <i>decide the number</i></h3>
+        <p>Most line items in a capex plan are furniture. A handful are structural to the entire budget: the electrical service and switchgear, the central plant, the envelope, the elevators, and whatever the seismic story turns out to be. These deserve their own investigation, with the right specialist in the room, because a single obsolete switchboard or a mischaracterized structural system can move the total more than every cosmetic line combined. Rule out the expensive fears first, deliberately, in writing.</p>
+        <h3>Capex is a <i>scenario, not a list</i></h3>
+        <p>What a building needs depends on what it is for. A single-tenant future and a multi-tenant future produce different demising, different code triggers, different systems logic, and materially different totals. So the honest deliverable is not one number. It is the same workbook run through each plausible future, so ownership can see how the strategy decision and the capex decision are actually one decision, made twice.</p>
+        <p>None of this is exotic. It is the willingness to hold every number in one place, label what you actually know, and let the building answer before the budget does.</p>
+        <div class="art-note">General commentary on capital planning and property condition diligence as the practice approaches it. Every building and transaction is different. Nothing here is legal, engineering, or investment advice, and nothing here replaces an assessment of your actual asset.</div>
+      </div>
+    </div>
+    <div class="nav-next">
+      <a href="journal-leveling.html"><span class="t">Two bids are never the same bid.</span><span class="meta">READ ↗</span></a>
+      <a href="works.html"><span class="t">The full works index</span><span class="meta">WORKS ↗</span></a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-slot"></div>
+<script src="shell.js?v=1776805947946"></script>
+</body>
+</html>

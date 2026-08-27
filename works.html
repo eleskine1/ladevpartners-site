@@ -45,7 +45,9 @@
 
   /* Cards */
   .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 32px; }
-  .card { display: flex; flex-direction: column; gap: 16px; cursor: pointer; }
+  .card { display: flex; flex-direction: column; gap: 16px; height: 100%; }
+  .card-rule { margin-top: auto; }
+  .card { cursor: default; }
   .card-media { aspect-ratio: 4/3; transition: transform .4s cubic-bezier(.2,.7,.2,1); }
   .card:hover .card-media { transform: translateY(-4px); }
   .card-meta { display: flex; justify-content: space-between; align-items: baseline; }
@@ -72,6 +74,18 @@
   @media (max-width: 480px) {
     .page-title { font-size: 36px; }
   }
+
+/* card slideshow */
+.card-media { position: relative; overflow: hidden; }
+.card-media img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .35s ease; }
+.card-media img.on { opacity:1; }
+.slide-nav { position:absolute; top:50%; transform:translateY(-50%); width:34px; height:34px; display:flex; align-items:center; justify-content:center; background:rgba(244,241,234,.85); color:#141210; font-family:var(--f-mono); font-size:14px; cursor:pointer; user-select:none; opacity:0; transition:opacity .2s; z-index:2; border:1px solid rgba(20,18,16,.15); }
+.card-media:hover .slide-nav, .card-media:active .slide-nav { opacity:1; }
+.slide-nav.prev { left:10px; } .slide-nav.next { right:10px; }
+.slide-dots { position:absolute; bottom:10px; left:0; right:0; display:flex; gap:6px; justify-content:center; z-index:2; }
+.slide-dots span { width:6px; height:6px; border-radius:50%; background:rgba(244,241,234,.55); border:1px solid rgba(20,18,16,.2); }
+.slide-dots span.on { background:var(--accent); }
+@media (hover:none) { .slide-nav { opacity:1; } }
 </style>
 </head>
 <body>
@@ -88,7 +102,7 @@
     </div>
 
     <div class="view-switch">
-      <div class="meta">12 WORKS · 11 ACTIVE · GREATER LOS ANGELES</div>
+      <div class="meta">20 WORKS · 11 IN PROGRESS · 09 COMPLETE</div>
       <div class="view-btns">
         <button class="vbtn" data-view="cards">Cards</button>
         <button class="vbtn" data-view="editorial">Editorial index</button>
@@ -103,50 +117,77 @@
 
     <!-- VIEW 1 · Editorial index -->
     <div class="view view-editorial">
-      <div class="ed-row"><div class="num">№ 012</div><div class="t">Eight ADUs, One Lot</div><div class="loc">Santa Monica</div><div class="scope">Development management · SB 1211 · 8 new units</div><div class="yr">IN PERMITTING</div><div class="ed-preview placeholder" data-placeholder="№ 012"></div></div>
-      <div class="ed-row"><div class="num">№ 011</div><div class="t">The Service Upgrade</div><div class="loc">Encino</div><div class="scope">CM oversight · Multifamily electrical infrastructure</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 011"></div></div>
-      <div class="ed-row"><div class="num">№ 010</div><div class="t">Medical on Ventura</div><div class="loc">Encino</div><div class="scope">Construction management · Tenant improvement + change of use</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 010"></div></div>
-      <div class="ed-row"><div class="num">№ 009</div><div class="t">The Courtyard Envelope</div><div class="loc">Santa Monica</div><div class="scope">CM · HOA waterproofing + 80-window replacement</div><div class="yr">PRE-CONSTRUCTION</div><div class="ed-preview placeholder" data-placeholder="№ 009"></div></div>
-      <div class="ed-row"><div class="num">№ 008</div><div class="t">Multifamily Reposition</div><div class="loc">Pasadena</div><div class="scope">Development management · Unit turns + site utilities</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 008"></div></div>
-      <div class="ed-row"><div class="num">№ 007</div><div class="t">Courtyard Multifamily</div><div class="loc">Van Nuys</div><div class="scope">Development management · Renovation + ADU additions</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 007"></div></div>
-      <div class="ed-row"><div class="num">№ 006</div><div class="t">The Soft-Story Answer</div><div class="loc">Highland Park</div><div class="scope">Advisory · Seismic strategy + ADU phasing</div><div class="yr">ADVISORY</div><div class="ed-preview placeholder" data-placeholder="№ 006"></div></div>
-      <div class="ed-row"><div class="num">№ 005</div><div class="t">Diligence on a Flip</div><div class="loc">Highland Park</div><div class="scope">Feasibility · Acquisition diligence, unpermitted space</div><div class="yr">MMXXVI</div><div class="ed-preview placeholder" data-placeholder="№ 005"></div></div>
-      <div class="ed-row"><div class="num">№ 004</div><div class="t">A Garage, Made Legal</div><div class="loc">Burbank</div><div class="scope">ADU legalization · AB 2533 pathway</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 004"></div></div>
-      <div class="ed-row"><div class="num">№ 003</div><div class="t">Garage Conversion ADU</div><div class="loc">Los Angeles</div><div class="scope">Bid direction + CM · Conversion ADU</div><div class="yr">PRE-CONSTRUCTION</div><div class="ed-preview placeholder" data-placeholder="№ 003"></div></div>
-      <div class="ed-row"><div class="num">№ 002</div><div class="t">Two ADUs, Ground-Up</div><div class="loc">Los Angeles</div><div class="scope">Bid leveling + CM · Two-unit ADU program</div><div class="yr">PRE-CONSTRUCTION</div><div class="ed-preview placeholder" data-placeholder="№ 002"></div></div>
-      <div class="ed-row"><div class="num">№ 001</div><div class="t">Pool, Spa, and Garden</div><div class="loc">Los Angeles</div><div class="scope">Construction management · Backyard remodel</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 001"></div></div>
+      <div class="ed-row"><div class="num">№ 020</div><div class="t">The Seventy-Nine</div><div class="loc">Encino</div><div class="scope">Advisory · Pre-Development · Construction Management</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 020"></div></div>
+      <div class="ed-row"><div class="num">№ 019</div><div class="t">A Program for Fifty</div><div class="loc">Pasadena</div><div class="scope">Advisory · Pre-Development · Construction Management</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 019"></div></div>
+      <div class="ed-row"><div class="num">№ 018</div><div class="t">The Forty-Five</div><div class="loc">Van Nuys</div><div class="scope">Advisory · Pre-Development · Construction Management</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 018"></div></div>
+      <div class="ed-row"><div class="num">№ 017</div><div class="t">Office to Exam Room</div><div class="loc">Encino</div><div class="scope">Advisory · Pre-Development · Construction Management</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 017"></div></div>
+      <div class="ed-row"><div class="num">№ 016</div><div class="t">Fourplex, Doubled</div><div class="loc">Santa Monica</div><div class="scope">Advisory · Pre-Development · Construction Management</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 016"></div></div>
+      <div class="ed-row"><div class="num">№ 015</div><div class="t">The Back Ten</div><div class="loc">Santa Monica</div><div class="scope">Advisory · Pre-Development · Construction Management</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 015"></div></div>
+      <div class="ed-row"><div class="num">№ 014</div><div class="t">Seven, Then Eight</div><div class="loc">Santa Monica</div><div class="scope">Advisory · Pre-Development · Construction Management</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 014"></div></div>
+      <div class="ed-row"><div class="num">№ 013</div><div class="t">The Burbank Sixteen</div><div class="loc">Burbank</div><div class="scope">Advisory · Pre-Development · Construction Management</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 013"></div></div>
+      <div class="ed-row"><div class="num">№ 012</div><div class="t">Twenty and Sixteen</div><div class="loc">Valley Village</div><div class="scope">Advisory · Pre-Development</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 012"></div></div>
+      <div class="ed-row"><div class="num">№ 011</div><div class="t">A House in the Hills</div><div class="loc">Hollywood Hills</div><div class="scope">Pre-Development · Construction Management</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 011"></div></div>
+      <div class="ed-row"><div class="num">№ 010</div><div class="t">Medical, Renewed</div><div class="loc">Beverly Grove</div><div class="scope">Pre-Development · Construction Management</div><div class="yr">IN PROGRESS</div><div class="ed-preview placeholder" data-placeholder="№ 010"></div></div>
+      <div class="ed-row"><div class="num">№ 009</div><div class="t">Eight, Plus Two</div><div class="loc">Echo Park</div><div class="scope">Advisory · Pre-Development · Construction Management</div><div class="yr">COMPLETE</div><div class="ed-preview placeholder" data-placeholder="№ 009"></div></div>
+      <div class="ed-row"><div class="num">№ 008</div><div class="t">Three Into Four</div><div class="loc">Echo Park</div><div class="scope">Advisory · Pre-Development · Construction Management</div><div class="yr">COMPLETE</div><div class="ed-preview placeholder" data-placeholder="№ 008"></div></div>
+      <div class="ed-row"><div class="num">№ 007</div><div class="t">The Elysian House</div><div class="loc">Elysian Valley</div><div class="scope">Construction Management</div><div class="yr">COMPLETE</div><div class="ed-preview placeholder" data-placeholder="№ 007"></div></div>
+      <div class="ed-row"><div class="num">№ 006</div><div class="t">Holding Up Fifty</div><div class="loc">Hollywood</div><div class="scope">Construction Management</div><div class="yr">COMPLETE</div><div class="ed-preview placeholder" data-placeholder="№ 006"></div></div>
+      <div class="ed-row"><div class="num">№ 005</div><div class="t">The Heights Remodel</div><div class="loc">Angelino Heights</div><div class="scope">Construction Management</div><div class="yr">COMPLETE</div><div class="ed-preview placeholder" data-placeholder="№ 005"></div></div>
+      <div class="ed-row"><div class="num">№ 004</div><div class="t">Sixteen, Underwritten</div><div class="loc">Santa Monica</div><div class="scope">Advisory</div><div class="yr">COMPLETE</div><div class="ed-preview placeholder" data-placeholder="№ 004"></div></div>
+      <div class="ed-row"><div class="num">№ 003</div><div class="t">Sixteen by the Water</div><div class="loc">Playa del Rey</div><div class="scope">Advisory · Pre-Development</div><div class="yr">COMPLETE</div><div class="ed-preview placeholder" data-placeholder="№ 003"></div></div>
+      <div class="ed-row"><div class="num">№ 002</div><div class="t">The Medical Buy</div><div class="loc">Los Angeles</div><div class="scope">Advisory</div><div class="yr">COMPLETE</div><div class="ed-preview placeholder" data-placeholder="№ 002"></div></div>
+      <div class="ed-row"><div class="num">№ 001</div><div class="t">The Brentwood House</div><div class="loc">Brentwood</div><div class="scope">Construction Management</div><div class="yr">COMPLETE</div><div class="ed-preview placeholder" data-placeholder="№ 001"></div></div>
     </div>
 
     <!-- VIEW 2 · Large type -->
     <div class="view view-large">
       <div class="lg-list">
-        <div class="lg-row"><div class="num">012</div><div class="t">Eight <i>ADUs,</i> One Lot<span class="loc">Santa Monica</span></div><div class="yr">IN PERMITTING</div></div>
-        <div class="lg-row"><div class="num">011</div><div class="t">The <i>Service</i> Upgrade<span class="loc">Encino</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">010</div><div class="t">Medical on <i>Ventura</i><span class="loc">Encino</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">009</div><div class="t">The <i>Courtyard</i> Envelope<span class="loc">Santa Monica</span></div><div class="yr">PRE-CONSTRUCTION</div></div>
-        <div class="lg-row"><div class="num">008</div><div class="t">Multifamily <i>Reposition</i><span class="loc">Pasadena</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">007</div><div class="t">Courtyard <i>Multifamily</i><span class="loc">Van Nuys</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">006</div><div class="t">The <i>Soft-Story</i> Answer<span class="loc">Highland Park</span></div><div class="yr">ADVISORY</div></div>
-        <div class="lg-row"><div class="num">005</div><div class="t">Diligence on a <i>Flip</i><span class="loc">Highland Park</span></div><div class="yr">MMXXVI</div></div>
-        <div class="lg-row"><div class="num">004</div><div class="t">A Garage, <i>Made Legal</i><span class="loc">Burbank</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">003</div><div class="t">Garage <i>Conversion</i> ADU<span class="loc">Los Angeles</span></div><div class="yr">PRE-CONSTRUCTION</div></div>
-        <div class="lg-row"><div class="num">002</div><div class="t">Two ADUs, <i>Ground-Up</i><span class="loc">Los Angeles</span></div><div class="yr">PRE-CONSTRUCTION</div></div>
-        <div class="lg-row"><div class="num">001</div><div class="t">Pool, Spa, and <i>Garden</i><span class="loc">Los Angeles</span></div><div class="yr">IN PROGRESS</div></div>
+        <div class="lg-row"><div class="num">020</div><div class="t">The <i>Seventy-Nine</i><span class="loc">Encino</span></div><div class="yr">IN PROGRESS</div></div>
+        <div class="lg-row"><div class="num">019</div><div class="t">A Program for <i>Fifty</i><span class="loc">Pasadena</span></div><div class="yr">IN PROGRESS</div></div>
+        <div class="lg-row"><div class="num">018</div><div class="t">The <i>Forty-Five</i><span class="loc">Van Nuys</span></div><div class="yr">IN PROGRESS</div></div>
+        <div class="lg-row"><div class="num">017</div><div class="t">Office to <i>Exam Room</i><span class="loc">Encino</span></div><div class="yr">IN PROGRESS</div></div>
+        <div class="lg-row"><div class="num">016</div><div class="t">Fourplex, <i>Doubled</i><span class="loc">Santa Monica</span></div><div class="yr">IN PROGRESS</div></div>
+        <div class="lg-row"><div class="num">015</div><div class="t">The <i>Back Ten</i><span class="loc">Santa Monica</span></div><div class="yr">IN PROGRESS</div></div>
+        <div class="lg-row"><div class="num">014</div><div class="t">Seven, Then <i>Eight</i><span class="loc">Santa Monica</span></div><div class="yr">IN PROGRESS</div></div>
+        <div class="lg-row"><div class="num">013</div><div class="t">The Burbank <i>Sixteen</i><span class="loc">Burbank</span></div><div class="yr">IN PROGRESS</div></div>
+        <div class="lg-row"><div class="num">012</div><div class="t">Twenty and <i>Sixteen</i><span class="loc">Valley Village</span></div><div class="yr">IN PROGRESS</div></div>
+        <div class="lg-row"><div class="num">011</div><div class="t">A House in the <i>Hills</i><span class="loc">Hollywood Hills</span></div><div class="yr">IN PROGRESS</div></div>
+        <div class="lg-row"><div class="num">010</div><div class="t">Medical, <i>Renewed</i><span class="loc">Beverly Grove</span></div><div class="yr">IN PROGRESS</div></div>
+        <div class="lg-row"><div class="num">009</div><div class="t">Eight, Plus <i>Two</i><span class="loc">Echo Park</span></div><div class="yr">COMPLETE</div></div>
+        <div class="lg-row"><div class="num">008</div><div class="t">Three Into <i>Four</i><span class="loc">Echo Park</span></div><div class="yr">COMPLETE</div></div>
+        <div class="lg-row"><div class="num">007</div><div class="t">The <i>Elysian</i> House<span class="loc">Elysian Valley</span></div><div class="yr">COMPLETE</div></div>
+        <div class="lg-row"><div class="num">006</div><div class="t">Holding Up <i>Fifty</i><span class="loc">Hollywood</span></div><div class="yr">COMPLETE</div></div>
+        <div class="lg-row"><div class="num">005</div><div class="t">The <i>Heights</i> Remodel<span class="loc">Angelino Heights</span></div><div class="yr">COMPLETE</div></div>
+        <div class="lg-row"><div class="num">004</div><div class="t">Sixteen, <i>Underwritten</i><span class="loc">Santa Monica</span></div><div class="yr">COMPLETE</div></div>
+        <div class="lg-row"><div class="num">003</div><div class="t">Sixteen by the <i>Water</i><span class="loc">Playa del Rey</span></div><div class="yr">COMPLETE</div></div>
+        <div class="lg-row"><div class="num">002</div><div class="t">The <i>Medical</i> Buy<span class="loc">Los Angeles</span></div><div class="yr">COMPLETE</div></div>
+        <div class="lg-row"><div class="num">001</div><div class="t">The <i>Brentwood</i> House<span class="loc">Brentwood</span></div><div class="yr">COMPLETE</div></div>
       </div>
     </div>
 
     <!-- VIEW 3 · Cards -->
     <div class="view view-cards">
       <div class="cards-grid">
-        <a class="card" href="study.html"><div class="card-media placeholder" data-placeholder="№ 012"></div><div class="card-meta"><div class="card-title">Eight ADUs, One Lot</div><div class="meta">IN PERMITTING</div></div><div class="card-scope">Eight new accessory dwelling units on an existing multifamily lot · Feasibility, fees, utilities, and permitting, held as one problem.</div><div class="card-rule"><div class="meta">SANTA MONICA</div><div class="meta" style="color:var(--accent)">№ 012 ↗</div></div></a>
-        <div class="card"><div class="card-media placeholder" data-placeholder="№ 011"></div><div class="card-meta"><div class="card-title">The Service Upgrade</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">A building-wide electrical reset · Engineering review, utility coordination, and contractor oversight for ownership.</div><div class="card-rule"><div class="meta">ENCINO</div><div class="meta" style="color:var(--accent)">№ 011</div></div></div>
-        <div class="card"><div class="card-media placeholder" data-placeholder="№ 010"></div><div class="card-meta"><div class="card-title">Medical on Ventura</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">Medical suites in a split-zoned commercial building · Entitlement sequencing through build-out.</div><div class="card-rule"><div class="meta">ENCINO</div><div class="meta" style="color:var(--accent)">№ 010</div></div></div>
-        <div class="card"><div class="card-media placeholder" data-placeholder="№ 009"></div><div class="card-meta"><div class="card-title">The Courtyard Envelope</div><div class="meta">PRE-CONSTRUCTION</div></div><div class="card-scope">Waterproofing and an 80-window replacement for an HOA · Bid leveling across non-equivalent scopes.</div><div class="card-rule"><div class="meta">SANTA MONICA</div><div class="meta" style="color:var(--accent)">№ 009</div></div></div>
-        <div class="card"><div class="card-media placeholder" data-placeholder="№ 008"></div><div class="card-meta"><div class="card-title">Multifamily Reposition</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">A courtyard building brought current · Unit renovations and utility coordination under a development management agreement.</div><div class="card-rule"><div class="meta">PASADENA</div><div class="meta" style="color:var(--accent)">№ 008</div></div></div>
-        <div class="card"><div class="card-media placeholder" data-placeholder="№ 007"></div><div class="card-meta"><div class="card-title">Courtyard Multifamily</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">Renovation and new ADU capacity on an existing multifamily site, managed end to end.</div><div class="card-rule"><div class="meta">VAN NUYS</div><div class="meta" style="color:var(--accent)">№ 007</div></div></div>
-        <div class="card"><div class="card-media placeholder" data-placeholder="№ 006"></div><div class="card-meta"><div class="card-title">The Soft-Story Answer</div><div class="meta">ADVISORY</div></div><div class="card-scope">A retrofit obligation, restructured · Shear walls in service of an ADU, and a phasing strategy that changed the math.</div><div class="card-rule"><div class="meta">HIGHLAND PARK</div><div class="meta" style="color:var(--accent)">№ 006</div></div></div>
-        <div class="card"><div class="card-media placeholder" data-placeholder="№ 005"></div><div class="card-meta"><div class="card-title">Diligence on a Flip</div><div class="meta">MMXXVI</div></div><div class="card-scope">Pre-purchase diligence on a renovated hillside home · The permitted record, read against the marketed one.</div><div class="card-rule"><div class="meta">HIGHLAND PARK</div><div class="meta" style="color:var(--accent)">№ 005</div></div></div>
-        <div class="card"><div class="card-media placeholder" data-placeholder="№ 004"></div><div class="card-meta"><div class="card-title">A Garage, Made Legal</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">An unpermitted detached ADU brought into the record · Scope, sequencing, and an honest budget.</div><div class="card-rule"><div class="meta">BURBANK</div><div class="meta" style="color:var(--accent)">№ 004</div></div></div>
+        <div class="card" data-work="020"><div class="card-media placeholder" data-placeholder="№ 020"></div><div class="card-meta"><div class="card-title">The Seventy-Nine</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">A 79-unit capital improvement program with building-wide systems upgrades, planned and delivered around residents in place.<br/><span style="opacity:.65">Advisory · Pre-Development · Construction Management</span></div><div class="card-rule"><div class="meta">ENCINO</div><div class="meta" style="color:var(--accent)">№ 020</div></div></div>
+        <div class="card" data-work="019"><div class="card-media placeholder" data-placeholder="№ 019"></div><div class="card-meta"><div class="card-title">A Program for Fifty</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">A 50-unit capital improvement program with new ADU additions: one budget, one schedule, one accountable voice.<br/><span style="opacity:.65">Advisory · Pre-Development · Construction Management</span></div><div class="card-rule"><div class="meta">PASADENA</div><div class="meta" style="color:var(--accent)">№ 019</div></div></div>
+        <div class="card" data-work="018"><div class="card-media placeholder" data-placeholder="№ 018"></div><div class="card-meta"><div class="card-title">The Forty-Five</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">A 45-unit capital improvement program with ADU additions, carried from first assessment through construction.<br/><span style="opacity:.65">Advisory · Pre-Development · Construction Management</span></div><div class="card-rule"><div class="meta">VAN NUYS</div><div class="meta" style="color:var(--accent)">№ 018</div></div></div>
+        <div class="card" data-work="017"><div class="card-media placeholder" data-placeholder="№ 017"></div><div class="card-meta"><div class="card-title">Office to Exam Room</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">An office building converted to medical use and built out, from entitlement sequencing through delivery.<br/><span style="opacity:.65">Advisory · Pre-Development · Construction Management</span></div><div class="card-rule"><div class="meta">ENCINO</div><div class="meta" style="color:var(--accent)">№ 017</div></div></div>
+        <div class="card" data-work="016"><div class="card-media placeholder" data-placeholder="№ 016"></div><div class="card-meta"><div class="card-title">Fourplex, Doubled</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">A fourplex remodeled and mapped to condominiums, with four new ADUs infilled behind it as condos of their own.<br/><span style="opacity:.65">Advisory · Pre-Development · Construction Management</span></div><div class="card-rule"><div class="meta">SANTA MONICA</div><div class="meta" style="color:var(--accent)">№ 016</div></div></div>
+        <div class="card" data-work="015"><div class="card-media placeholder" data-placeholder="№ 015"></div><div class="card-meta"><div class="card-title">The Back Ten</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">An 8-unit acquisition with ten new ADUs infilled behind it, advised, planned, and managed as one program.<br/><span style="opacity:.65">Advisory · Pre-Development · Construction Management</span></div><div class="card-rule"><div class="meta">SANTA MONICA</div><div class="meta" style="color:var(--accent)">№ 015</div></div></div>
+        <div class="card" data-work="014"><div class="card-media placeholder" data-placeholder="№ 014"></div><div class="card-meta"><div class="card-title">Seven, Then Eight</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">A 7-unit acquisition with eight new ADUs to follow: diligence through delivery, held by one hand.<br/><span style="opacity:.65">Advisory · Pre-Development · Construction Management</span></div><div class="card-rule"><div class="meta">SANTA MONICA</div><div class="meta" style="color:var(--accent)">№ 014</div></div></div>
+        <div class="card" data-work="013"><div class="card-media placeholder" data-placeholder="№ 013"></div><div class="card-meta"><div class="card-title">The Burbank Sixteen</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">Sixteen new ADUs infilled across a single site, run as one development program with one schedule.<br/><span style="opacity:.65">Advisory · Pre-Development · Construction Management</span></div><div class="card-rule"><div class="meta">BURBANK</div><div class="meta" style="color:var(--accent)">№ 013</div></div></div>
+        <div class="card" data-work="012"><div class="card-media placeholder" data-placeholder="№ 012"></div><div class="card-meta"><div class="card-title">Twenty and Sixteen</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">A 20-unit acquisition advised and planned for sixteen new ADUs, priced and sequenced before a shovel moves.<br/><span style="opacity:.65">Advisory · Pre-Development</span></div><div class="card-rule"><div class="meta">VALLEY VILLAGE</div><div class="meta" style="color:var(--accent)">№ 012</div></div></div>
+        <div class="card" data-work="011"><div class="card-media placeholder" data-placeholder="№ 011"></div><div class="card-meta"><div class="card-title">A House in the Hills</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">A custom single-family remodel, planned and managed for a private client.<br/><span style="opacity:.65">Pre-Development · Construction Management</span></div><div class="card-rule"><div class="meta">HOLLYWOOD HILLS</div><div class="meta" style="color:var(--accent)">№ 011</div></div></div>
+        <div class="card" data-work="010"><div class="card-media placeholder" data-placeholder="№ 010"></div><div class="card-meta"><div class="card-title">Medical, Renewed</div><div class="meta">IN PROGRESS</div></div><div class="card-scope">A medical office tenant renovation, taken from planning through delivery in an operating practice.<br/><span style="opacity:.65">Pre-Development · Construction Management</span></div><div class="card-rule"><div class="meta">BEVERLY GROVE</div><div class="meta" style="color:var(--accent)">№ 010</div></div></div>
+        <div class="card" data-work="009"><div class="card-media placeholder" data-placeholder="№ 009"></div><div class="card-meta"><div class="card-title">Eight, Plus Two</div><div class="meta">COMPLETE</div></div><div class="card-scope">An 8-unit renovation with two new ADUs added, advised, planned, and built as one project.<br/><span style="opacity:.65">Advisory · Pre-Development · Construction Management</span></div><div class="card-rule"><div class="meta">ECHO PARK</div><div class="meta" style="color:var(--accent)">№ 009</div></div></div>
+        <div class="card" data-work="008"><div class="card-media placeholder" data-placeholder="№ 008"></div><div class="card-meta"><div class="card-title">Three Into Four</div><div class="meta">COMPLETE</div></div><div class="card-scope">A triplex rental converted to a four-unit condominium: the mapping, the remodel, and the sale-ready delivery.<br/><span style="opacity:.65">Advisory · Pre-Development · Construction Management</span></div><div class="card-rule"><div class="meta">ECHO PARK</div><div class="meta" style="color:var(--accent)">№ 008</div></div></div>
+        <div class="card" data-work="007"><div class="card-media placeholder" data-placeholder="№ 007"></div><div class="card-meta"><div class="card-title">The Elysian House</div><div class="meta">COMPLETE</div></div><div class="card-scope">A ground-up custom home, managed for the owner from foundation to keys.<br/><span style="opacity:.65">Construction Management</span></div><div class="card-rule"><div class="meta">ELYSIAN VALLEY</div><div class="meta" style="color:var(--accent)">№ 007</div></div></div>
+        <div class="card" data-work="006"><div class="card-media placeholder" data-placeholder="№ 006"></div><div class="card-meta"><div class="card-title">Holding Up Fifty</div><div class="meta">COMPLETE</div></div><div class="card-scope">Underpinning beneath an occupied 50-unit building, with a parking lot developed alongside.<br/><span style="opacity:.65">Construction Management</span></div><div class="card-rule"><div class="meta">HOLLYWOOD</div><div class="meta" style="color:var(--accent)">№ 006</div></div></div>
+        <div class="card" data-work="005"><div class="card-media placeholder" data-placeholder="№ 005"></div><div class="card-meta"><div class="card-title">The Heights Remodel</div><div class="meta">COMPLETE</div></div><div class="card-scope">A custom single-family remodel in one of the city's oldest neighborhoods, handled with the care the street deserves.<br/><span style="opacity:.65">Construction Management</span></div><div class="card-rule"><div class="meta">ANGELINO HEIGHTS</div><div class="meta" style="color:var(--accent)">№ 005</div></div></div>
+        <div class="card" data-work="004"><div class="card-media placeholder" data-placeholder="№ 004"></div><div class="card-meta"><div class="card-title">Sixteen, Underwritten</div><div class="meta">COMPLETE</div></div><div class="card-scope">A 16-unit acquisition with ten ADUs of infill capacity: the advisory that made the deal make sense.<br/><span style="opacity:.65">Advisory</span></div><div class="card-rule"><div class="meta">SANTA MONICA</div><div class="meta" style="color:var(--accent)">№ 004</div></div></div>
+        <div class="card" data-work="003"><div class="card-media placeholder" data-placeholder="№ 003"></div><div class="card-meta"><div class="card-title">Sixteen by the Water</div><div class="meta">COMPLETE</div></div><div class="card-scope">A 16-unit acquisition carried through diligence and pre-development to a buildable ten-ADU plan.<br/><span style="opacity:.65">Advisory · Pre-Development</span></div><div class="card-rule"><div class="meta">PLAYA DEL REY</div><div class="meta" style="color:var(--accent)">№ 003</div></div></div>
+        <div class="card" data-work="002"><div class="card-media placeholder" data-placeholder="№ 002"></div><div class="card-meta"><div class="card-title">The Medical Buy</div><div class="meta">COMPLETE</div></div><div class="card-scope">A medical office acquisition with its capital program shaped in diligence, before the deal closed.<br/><span style="opacity:.65">Advisory</span></div><div class="card-rule"><div class="meta">LOS ANGELES</div><div class="meta" style="color:var(--accent)">№ 002</div></div></div>
+        <div class="card" data-work="001"><div class="card-media placeholder" data-placeholder="№ 001"></div><div class="card-meta"><div class="card-title">The Brentwood House</div><div class="meta">COMPLETE</div></div><div class="card-scope">A ground-up custom home, delivered under construction management.<br/><span style="opacity:.65">Construction Management</span></div><div class="card-rule"><div class="meta">BRENTWOOD</div><div class="meta" style="color:var(--accent)">№ 001</div></div></div>
       </div>
     </div>
 
@@ -154,6 +195,65 @@
 </section>
 
 <div id="footer-slot"></div>
+<script>
+/* Work photos. When images are ready, list paths per work number, e.g.
+   "020": ["images/020-1.jpg","images/020-2.jpg"]  */
+const WORK_IMAGES = {
+  "011": ["images/011-1.jpg"],
+  "010": ["images/010-1.jpg"],
+  "005": ["images/005-1.jpg","images/005-2.jpg","images/005-3.jpg","images/005-4.jpg","images/005-5.jpg"],
+  "015": ["images/015-1.jpg"],
+  "017": ["images/017-1.jpg"],
+  "020": ["images/020-1.jpg"],
+  "019": ["images/019-1.jpg"],
+  "018": ["images/018-1.jpg"],
+  "016": ["images/016-1.jpg"],
+  "014": ["images/014-1.jpg"],
+  "013": ["images/013-1.jpg"],
+  "012": ["images/012-1.jpg"],
+  "009": ["images/009-1.jpg","images/009-2.jpg","images/009-3.jpg","images/009-4.jpg","images/009-5.jpg"],
+  "008": ["images/008-1.jpg","images/008-2.jpg","images/008-3.jpg","images/008-4.jpg"],
+  "007": ["images/007-1.jpg","images/007-2.jpg","images/007-3.jpg","images/007-4.jpg","images/007-5.jpg"],
+  "006": ["images/006-1.jpg"],
+  "004": ["images/004-1.jpg"],
+  "003": ["images/003-1.jpg"],
+  "002": ["images/002-1.jpg"],
+  "001": ["images/001-1.jpg","images/001-2.jpg","images/001-3.jpg","images/001-4.jpg","images/001-5.jpg"]
+};
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card[data-work]').forEach(card => {
+    const imgs = WORK_IMAGES[card.dataset.work] || [];
+    if (!imgs.length) return;
+    const media = card.querySelector('.card-media');
+    media.classList.remove('placeholder');
+    media.removeAttribute('data-placeholder');
+    let idx = 0;
+    imgs.forEach((src,i) => {
+      const im = document.createElement('img');
+      im.src = src; im.alt = ''; im.loading = 'lazy';
+      if (i===0) im.classList.add('on');
+      media.appendChild(im);
+    });
+    if (imgs.length > 1) {
+      const dots = document.createElement('div'); dots.className='slide-dots';
+      imgs.forEach((_,i)=>{ const d=document.createElement('span'); if(i===0)d.classList.add('on'); dots.appendChild(d); });
+      media.appendChild(dots);
+      const show = n => {
+        idx = (n + imgs.length) % imgs.length;
+        media.querySelectorAll('img').forEach((im,i)=>im.classList.toggle('on', i===idx));
+        dots.querySelectorAll('span').forEach((d,i)=>d.classList.toggle('on', i===idx));
+      };
+      ['prev','next'].forEach(dir => {
+        const b = document.createElement('div');
+        b.className = 'slide-nav ' + dir;
+        b.textContent = dir==='prev' ? '\u2190' : '\u2192';
+        b.addEventListener('click', e => { e.stopPropagation(); show(dir==='prev' ? idx-1 : idx+1); });
+        media.appendChild(b);
+      });
+    }
+  });
+});
+</script>
 <script src="shell.js?v=1776805947946"></script>
 <script>
   // Clear stale session default so new default (cards) takes

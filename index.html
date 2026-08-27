@@ -30,6 +30,14 @@
   [data-home-layout="C"] .hero-c { display: block; }
   [data-home-layout="C"] .hero-a, [data-home-layout="C"] .hero-b { display: none; }
 
+  .hero-a-bleed { position: relative; margin-top: 24px; min-height: min(78vh, 760px); display: flex; align-items: flex-end; background-image: url('hero-wide.jpg'); background-size: cover; background-position: 62% center; }
+  .hero-a-bleed::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to right, rgba(244,241,234,.96) 0%, rgba(244,241,234,.82) 30%, rgba(244,241,234,0) 62%); }
+  .hero-a-bleed-content { position: relative; padding: 64px 48px; max-width: 560px; }
+  @media (max-width: 768px) {
+    .hero-a-bleed { min-height: 72vh; background-position: 68% center; }
+    .hero-a-bleed-content { padding: 40px 20px; }
+    .hero-a-bleed::before { background: linear-gradient(to top, rgba(244,241,234,.96) 0%, rgba(244,241,234,.85) 45%, rgba(244,241,234,.15) 100%); }
+  }
   .hero-a-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; padding-top: 20px; }
   .hero-a-mark { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: clamp(56px, 7vw, 120px); line-height: 0.92; letter-spacing: -0.045em; color: var(--fg); padding: 28px 0 0; }
   .hero-a-mark .dot { color: var(--accent); }
@@ -138,8 +146,8 @@
       <div class="meta">LOS ANGELES · EST. MMXXV</div>
     </div>
     <div class="hero-a-mark">LA<br/>development<br/>partners<span class="dot">.</span></div>
-    <div class="hero-a-inner">
-      <div>
+    <div class="hero-a-bleed">
+      <div class="hero-a-bleed-content">
         <div class="hero-a-tag">A practice in<br/><i class="italic">building well.</i></div>
         <div class="body-lg" style="max-width:440px; margin-top:32px;">
           Owner's-side management for commercial, multifamily, and residential projects across Los Angeles. One accountable voice, from feasibility through handover.
@@ -148,9 +156,6 @@
           <a href="works.html" class="btn">Selected works <span class="arrow">↗</span></a>
           <a href="contact.html" class="btn btn-ghost">Inquire</a>
         </div>
-      </div>
-      <div>
-        <div class="hero-a-media" style="background-image:url('hero-1.jpg'); background-size:cover; background-position:center;"></div>
       </div>
     </div>
     <div class="hero-a-meta">

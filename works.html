@@ -21,11 +21,10 @@
 
   .view { display: none; padding: 40px 0; }
   [data-works-view="editorial"] .view-editorial,
-  [data-works-view="large"] .view-large,
   [data-works-view="cards"] .view-cards { display: block; }
 
   /* Editorial index */
-  .ed-row { display: grid; grid-template-columns: 100px 1.4fr 1fr 1fr auto; gap: 40px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--rule); cursor: pointer; transition: background .2s; position: relative; }
+  .ed-row { display: grid; grid-template-columns: 100px 1.4fr 1fr 1fr 170px; gap: 40px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--rule); transition: background .2s; position: relative; }
   .ed-row:hover { background: var(--card); }
   .ed-row .num { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.18em; color: var(--accent); }
   .ed-row .t { font-family: var(--f-edit); font-weight: 300; font-style: italic; font-size: clamp(22px, 2.4vw, 36px); line-height: 1.1; letter-spacing: -0.025em; }
@@ -64,7 +63,6 @@
     .view-switch { display: none; }
     .view { display: none; }
     [data-works-view] .view-editorial,
-    [data-works-view] .view-large { display: none; }
     [data-works-view] .view-cards,
     .view-cards { display: block; }
     .cards-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -106,8 +104,7 @@
       <div class="view-btns">
         <button class="vbtn" data-view="cards">Cards</button>
         <button class="vbtn" data-view="editorial">Editorial index</button>
-        <button class="vbtn" data-view="large">Large type</button>
-      </div>
+              </div>
     </div>
   </div>
 </header>
@@ -140,30 +137,6 @@
     </div>
 
     <!-- VIEW 2 · Large type -->
-    <div class="view view-large">
-      <div class="lg-list">
-        <div class="lg-row"><div class="num">020</div><div class="t">The <i>Seventy-Nine</i><span class="loc">Encino</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">019</div><div class="t">A Program for <i>Fifty</i><span class="loc">Pasadena</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">018</div><div class="t">The <i>Forty-Five</i><span class="loc">Van Nuys</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">017</div><div class="t">Office to <i>Exam Room</i><span class="loc">Encino</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">016</div><div class="t">Fourplex, <i>Doubled</i><span class="loc">Santa Monica</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">015</div><div class="t">The <i>Back Ten</i><span class="loc">Santa Monica</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">014</div><div class="t">Seven, Then <i>Eight</i><span class="loc">Santa Monica</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">013</div><div class="t">The Burbank <i>Sixteen</i><span class="loc">Burbank</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">012</div><div class="t">Twenty and <i>Sixteen</i><span class="loc">Valley Village</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">011</div><div class="t">A House in the <i>Hills</i><span class="loc">Hollywood Hills</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">010</div><div class="t">Medical, <i>Renewed</i><span class="loc">Beverly Grove</span></div><div class="yr">IN PROGRESS</div></div>
-        <div class="lg-row"><div class="num">009</div><div class="t">Eight, Plus <i>Two</i><span class="loc">Echo Park</span></div><div class="yr">COMPLETE</div></div>
-        <div class="lg-row"><div class="num">008</div><div class="t">Three Into <i>Four</i><span class="loc">Echo Park</span></div><div class="yr">COMPLETE</div></div>
-        <div class="lg-row"><div class="num">007</div><div class="t">The <i>Elysian</i> House<span class="loc">Elysian Valley</span></div><div class="yr">COMPLETE</div></div>
-        <div class="lg-row"><div class="num">006</div><div class="t">Holding Up <i>Fifty</i><span class="loc">Hollywood</span></div><div class="yr">COMPLETE</div></div>
-        <div class="lg-row"><div class="num">005</div><div class="t">The <i>Heights</i> Remodel<span class="loc">Angelino Heights</span></div><div class="yr">COMPLETE</div></div>
-        <div class="lg-row"><div class="num">004</div><div class="t">Sixteen, <i>Underwritten</i><span class="loc">Santa Monica</span></div><div class="yr">COMPLETE</div></div>
-        <div class="lg-row"><div class="num">003</div><div class="t">Sixteen by the <i>Water</i><span class="loc">Playa del Rey</span></div><div class="yr">COMPLETE</div></div>
-        <div class="lg-row"><div class="num">002</div><div class="t">The <i>Medical</i> Buy<span class="loc">Los Angeles</span></div><div class="yr">COMPLETE</div></div>
-        <div class="lg-row"><div class="num">001</div><div class="t">The <i>Brentwood</i> House<span class="loc">Brentwood</span></div><div class="yr">COMPLETE</div></div>
-      </div>
-    </div>
 
     <!-- VIEW 3 · Cards -->
     <div class="view view-cards">
@@ -252,6 +225,21 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
+  document.querySelectorAll('.ed-row').forEach(row => {
+    const numEl = row.querySelector('.num');
+    if (!numEl) return;
+    const num = (numEl.textContent.match(/\d+/) || [''])[0].padStart(3,'0');
+    const imgs = WORK_IMAGES[num] || [];
+    if (!imgs.length) return;
+    const prev = row.querySelector('.ed-preview');
+    if (!prev) return;
+    prev.classList.remove('placeholder');
+    prev.removeAttribute('data-placeholder');
+    prev.style.backgroundImage = "url('" + imgs[0] + "')";
+    prev.style.backgroundSize = 'cover';
+    prev.style.backgroundPosition = 'center';
+    prev.style.boxShadow = '0 8px 30px rgba(20,18,16,.18)';
+  });
 });
 </script>
 <script src="shell.js?v=1776805947946"></script>
@@ -260,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
   (() => {
     try {
       const t = JSON.parse(sessionStorage.getItem('ladp-tweaks') || '{}');
-      if (t.worksView === 'editorial') { delete t.worksView; sessionStorage.setItem('ladp-tweaks', JSON.stringify(t)); document.documentElement.setAttribute('data-works-view', 'cards'); }
+      if (t.worksView === 'editorial' || t.worksView === 'large') { delete t.worksView; sessionStorage.setItem('ladp-tweaks', JSON.stringify(t)); document.documentElement.setAttribute('data-works-view', 'cards'); }
     } catch (e) {}
   })();
 

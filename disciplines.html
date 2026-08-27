@@ -67,19 +67,19 @@
   <div class="container">
 
     <div class="meta" style="padding:8px 0 24px; border-bottom:1px solid var(--rule);"><span class="meta-accent">§ A</span> · SECTORS</div>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border-bottom:1px solid var(--rule);" class="sectors-grid">
-      <div style="padding:40px 40px 48px 0; border-right:1px solid var(--rule);" class="sector-col">
+    <div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto auto; gap:0; border-bottom:1px solid var(--rule);" class="sectors-grid">
+      <div style="padding:40px 40px 48px 0; border-right:1px solid var(--rule); display:grid; grid-template-rows:subgrid; grid-row:span 3; align-content:start;" class="sector-col">
         <div class="disc-name" style="font-size:clamp(28px,3vw,44px);"><i>Commercial.</i></div>
         <p style="font-size:16px; line-height:1.65; color:var(--fg-soft); max-width:52ch; margin:18px 0 24px;">Owner's-side management for income property and operating businesses: tenant improvements, building-system upgrades, repositioning, and new capacity. We treat the building as the asset it is, and the schedule as money.</p>
         <div class="disc-scope" style="display:flex; gap:20px; flex-wrap:wrap;"><div>OFFICE</div><div>MEDICAL</div><div>RETAIL &amp; RESTAURANT</div><div>MULTIFAMILY</div></div>
       </div>
-      <div style="padding:40px 0 48px 40px;" class="sector-col">
+      <div style="padding:40px 0 48px 40px; display:grid; grid-template-rows:subgrid; grid-row:span 3; align-content:start;" class="sector-col">
         <div class="disc-name" style="font-size:clamp(28px,3vw,44px);">Residential.</div>
         <p style="font-size:16px; line-height:1.65; color:var(--fg-soft); max-width:52ch; margin:18px 0 24px;">Private clients who want one accountable partner and a considered result: ground-up homes, whole-home transformations, and the accessory-dwelling work this practice was built on.</p>
         <div class="disc-scope" style="display:flex; gap:20px; flex-wrap:wrap;"><div>CUSTOM HOMES</div><div>WHOLE-HOME &amp; INTERIOR REMODELS</div><div>ADUS &amp; ADDITIONS</div></div>
       </div>
     </div>
-    <style>@media (max-width:768px){ .sectors-grid{grid-template-columns:1fr !important;} .sector-col{border-right:0 !important; padding:32px 0 !important; border-bottom:1px solid var(--rule);} .sector-col:last-child{border-bottom:0;} }</style>
+    <style>@media (max-width:768px){ .sectors-grid{grid-template-columns:1fr !important; grid-template-rows:none !important;} .sector-col{border-right:0 !important; padding:32px 0 !important; border-bottom:1px solid var(--rule); display:block !important;} .sector-col:last-child{border-bottom:0;} }</style>
 
     <div class="meta" style="padding:56px 0 24px;"><span class="meta-accent">§ B</span> · THE PHASES</div>
 

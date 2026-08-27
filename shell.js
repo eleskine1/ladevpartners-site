@@ -84,8 +84,7 @@
           </div>
           <div>
             <div class="footer-col-title">Elsewhere</div>
-            <a class="footer-link" href="https://www.linkedin.com/in/elijahleskinen/" rel="noopener" target="_blank">LinkedIn</a>
-            <a class="footer-link" href="journal.html">Journal</a>
+                        <a class="footer-link" href="journal.html">Journal</a>
             <a class="footer-link" href="contact.html">Inquire</a>
           </div>
         </div>

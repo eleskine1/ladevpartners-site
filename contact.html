@@ -93,7 +93,6 @@
         <div class="meta-block">
           <div class="meta">OFFICE</div>
           <div class="v">Los Angeles, California<br/>By appointment</div>
-          <div class="v" style="color:var(--fg-soft); margin-top:6px;">By appointment</div>
         </div>
         <div class="meta-block">
           <div class="meta">APPRENTICESHIP</div>
@@ -110,7 +109,11 @@
           <p>A member of the practice will write back within two business days. In the meantime, the <a href="journal.html" style="color:var(--accent); text-decoration:underline; text-underline-offset:3px;">journal</a> has notes on how we begin.</p>
         </div>
 
-        <form id="inquiry" novalidate>
+        <form id="inquiry" name="inquiry" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="inquiry"/>
+          <p style="display:none;"><label>Leave this empty: <input name="bot-field"/></label></p>
+          <input type="hidden" name="disciplines" id="f-disciplines"/>
+          <input type="hidden" name="budget" id="f-budget"/>
           <div class="field"><label>Name <span class="req">*</span></label><input required type="text" name="name" placeholder="Your name"/></div>
           <div class="field right"><label>Email <span class="req">*</span></label><input required type="email" name="email" placeholder="you@domain.com"/></div>
 
@@ -172,9 +175,25 @@
     e.preventDefault();
     const form = e.target;
     if (!form.checkValidity()) { form.reportValidity(); return; }
-    form.style.display = 'none';
-    document.getElementById('thanks').classList.add('shown');
-    window.scrollTo({ top: document.getElementById('thanks').getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+    // Collect chip selections into hidden fields
+    const pick = g => Array.from(document.querySelectorAll('.chips[data-group="' + g + '"] .chip.active')).map(x => x.textContent.trim()).join(', ');
+    document.getElementById('f-disciplines').value = pick('discipline');
+    document.getElementById('f-budget').value = pick('budget');
+    const btn = form.querySelector('.submit-btn');
+    btn.disabled = true; btn.style.opacity = '.6';
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    }).then(r => {
+      if (!r.ok) throw new Error('send failed');
+      form.style.display = 'none';
+      document.getElementById('thanks').classList.add('shown');
+      window.scrollTo({ top: document.getElementById('thanks').getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+    }).catch(() => {
+      btn.disabled = false; btn.style.opacity = '1';
+      alert('Something went wrong sending your inquiry. Please email info@ladevpartners.com directly.');
+    });
   });
 </script>
 </body>

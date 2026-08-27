@@ -112,7 +112,9 @@
         <div class="monthly-cap">· THE MONTHLY · A CURATED LETTER</div>
         <h2 class="monthly-h">Projects and works,<br/><i>on loan.</i></h2>
         <div class="monthly-dek">Once a month we gather the buildings, drawings, and objects that have taught us something that month. Most are not our own; credit is given where it's due. Delivered quietly, to your inbox, on the first of the month.</div>
-        <form class="sub-form" id="sub-form" novalidate>
+        <form class="sub-form" id="sub-form" name="subscribe" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="subscribe"/>
+          <p style="display:none;"><label>Leave this empty: <input name="bot-field"/></label></p>
           <input type="email" name="email" placeholder="you@somewhere.com" required />
           <button type="submit">Subscribe to The Monthly <span class="arrow">↗</span></button>
           <div class="sub-fine">No promotion. One letter a month. Unsubscribe anytime.</div>
@@ -145,7 +147,7 @@
 </section>
 
 <script>
-  // Subscribe form: local only, no backend yet
+  // Subscribe form: posts to Netlify Forms
   const subForm = document.getElementById('sub-form');
   if (subForm) {
     subForm.addEventListener('submit', (e) => {
@@ -156,7 +158,17 @@
         subForm.email.style.borderColor = 'var(--accent)';
         return;
       }
-      subForm.innerHTML = `<div class="sub-thanks">Considered. You'll receive the next issue on the first of the month.</div><div class="sub-fine">Subscribed as <b style="color:var(--fg);">${email}</b></div>`;
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(subForm)).toString()
+      }).then(r => {
+        if (!r.ok) throw new Error('send failed');
+        subForm.innerHTML = `<div class="sub-thanks">Considered. You'll receive the next issue when it arrives.</div><div class="sub-fine">Subscribed as <b style="color:var(--fg);">${email}</b></div>`;
+      }).catch(() => {
+        subForm.email.style.borderColor = 'var(--accent)';
+        alert('Something went wrong. Please email info@ladevpartners.com to subscribe.');
+      });
     });
   }
 </script>

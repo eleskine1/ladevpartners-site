@@ -162,6 +162,18 @@
 </script>
 
 <div id="footer-slot"></div>
+<script>
+  document.querySelectorAll('.fbtn').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.fbtn').forEach(x => x.classList.toggle('active', x === b));
+      const want = b.textContent.trim().toUpperCase();
+      document.querySelectorAll('.j-row').forEach(row => {
+        const tag = (row.querySelector('.tag')?.textContent || '').trim().toUpperCase();
+        row.style.display = (want === 'ALL' || tag === want) ? '' : 'none';
+      });
+    });
+  });
+</script>
 <script src="shell.js?v=1776805947946"></script>
 </body>
 </html>
